@@ -1,0 +1,96 @@
+# .NET Core and Visual Studio files
+bin/
+obj/
+.vs/
+*.user
+*.vscode
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.log
+*.ruleset
+*.snk
+*.userprefs
+*.dotsettings
+
+# NuGet packages
+**/packages/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# CodeRush
+_CodeRush*/
+*.crproj.user
+
+# SQL Server Project
+*.dbmdl
+*.dbproj.user
+*.dbproj.vspscc
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to checkin your Web App published files.
+PublishScripts/
+
+# Windows Azure Build Output
+csx/
+*.cspkg.*
+*.csx.*
+
+# Visual Studio cache files
+# files ending in .cache can be added to .gitignore as well
+#*.cache
+
+# Others
+*.Build.csdef
+~$*
+*~
+*.bak
+*.cache
+*.tmp
+*.temp
+*.o
+*.orig
+*.pyc
+*.ReSharper
+*.sln.ide
+*.suo
+*.swp
+*.tmp
+*.tmp_proj
+*.user
+*.userprefs
+*.wmk
+*.wpd
+*.wpx
+*.wxi
+*.wxl
+*.wxs
+*.xss

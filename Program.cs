@@ -1,3 +1,8 @@
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Design;
+//using tools
+using Smidge.Data;
+
 namespace Smidge
 {
     public class Program
@@ -9,6 +14,10 @@ namespace Smidge
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseNpgsql(options => builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
