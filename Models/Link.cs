@@ -9,17 +9,17 @@
 
         public string Summary { get; set; }
 
-        public ICollection<string> Categories { get; set; }
+        public ICollection<LinkCategory> Categories { get; set; }
 
         public Link()
         {
-            Categories = new List<string>();
+            Categories = new List<LinkCategory>();
             Title = string.Empty;
             Description = string.Empty;
             Summary = string.Empty;
         }
 
-        public Link(string title, string description, string summary, ICollection<string> categories)
+        public Link(string title, string description, string summary, ICollection<LinkCategory> categories)
         {
             Categories = categories;
             Title = title;
