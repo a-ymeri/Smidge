@@ -1,35 +1,36 @@
-﻿namespace Smidge.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Smidge.Models
 {
     public class Link
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
 
-        public string Summary { get; set; }
-
-        public ICollection<LinkCategory> Categories { get; set; }
+        public ICollection<Category> Categories { get; set; }
 
         public Link()
         {
-            Categories = new List<LinkCategory>();
+            Categories = new List<Category>();
             Title = string.Empty;
             Description = string.Empty;
-            Summary = string.Empty;
         }
 
-        public Link(string title, string description, string summary, ICollection<LinkCategory> categories)
+        public Link(string title, string description, ICollection<Category> categories)
         {
             Categories = categories;
             Title = title;
             Description = description;
-            Summary = summary;
         }
 
         public override string ToString()
         {
-            return $"Title: {Title}, Description: {Description}, Summary: {Summary}";
+            return $"Title: {Title}, Description: {Description}, Categories: {Categories}";
         }
 
     }

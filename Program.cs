@@ -1,5 +1,7 @@
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Design;
+//using npgsql
+global using Npgsql.EntityFrameworkCore.PostgreSQL;
 //using tools
 using Smidge.Data;
 
@@ -14,9 +16,10 @@ namespace Smidge
             // Add services to the container.
 
             builder.Services.AddControllers();
+            string connectionString = "Host=localhost;Port=5432;Database=smidge;Username=postgres;Password=postgres";
             builder.Services.AddDbContext<DataContext>(options =>
             {
-                options.UseNpgsql(options => builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(connectionString);
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

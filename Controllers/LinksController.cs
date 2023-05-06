@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Smidge.Data;
+using Smidge.DTO;
 using Smidge.Models;
 
 namespace Smidge.Controller
@@ -14,33 +15,33 @@ namespace Smidge.Controller
     [ApiController]
     public class LinksController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly DataContext dataContext;
 
         public LinksController(DataContext context)
         {
-            _context = context;
+            dataContext = context;
         }
 
         // GET: api/Links
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Link>>> GetLinks()
         {
-          if (_context.Links == null)
-          {
-              return NotFound();
-          }
-            return await _context.Links.ToListAsync();
+            if (dataContext.Links == null)
+            {
+                return NotFound();
+            }
+            return await dataContext.Links.ToListAsync();
         }
 
         // GET: api/Links/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Link>> GetLink(int id)
         {
-          if (_context.Links == null)
-          {
-              return NotFound();
-          }
-            var link = await _context.Links.FindAsync(id);
+            if (dataContext.Links == null)
+            {
+                return NotFound();
+            }
+            var link = await dataContext.Links.FindAsync(id);
 
             if (link == null)
             {
@@ -60,11 +61,11 @@ namespace Smidge.Controller
                 return BadRequest();
             }
 
-            _context.Entry(link).State = EntityState.Modified;
+            dataContext.Entry(link).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await dataContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,14 +85,15 @@ namespace Smidge.Controller
         // POST: api/Links
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Link>> PostLink(Link link)
+        public async Task<ActionResult<Link>> PostLink(ResourceDTO body)
         {
-          if (_context.Links == null)
-          {
-              return Problem("Entity set 'DataContext.Links'  is null.");
-          }
-            _context.Links.Add(link);
-            await _context.SaveChangesAsync();
+            if (dataContext.Links == null)
+            {
+                return Problem("Entity set 'DataContext.Links'  is null.");
+            }
+            var link = new Link(body.Name, body.Description, dataContext.LinkCategories.Where(c => body.Categories.Contains(c.Id)).ToList());
+            dataContext.Links.Add(link);
+            await dataContext.SaveChangesAsync();
 
             return CreatedAtAction("GetLink", new { id = link.Id }, link);
         }
@@ -100,25 +102,25 @@ namespace Smidge.Controller
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLink(int id)
         {
-            if (_context.Links == null)
+            if (dataContext.Links == null)
             {
                 return NotFound();
             }
-            var link = await _context.Links.FindAsync(id);
+            var link = await dataContext.Links.FindAsync(id);
             if (link == null)
             {
                 return NotFound();
             }
 
-            _context.Links.Remove(link);
-            await _context.SaveChangesAsync();
+            dataContext.Links.Remove(link);
+            await dataContext.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool LinkExists(int id)
         {
-            return (_context.Links?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (dataContext.Links?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
