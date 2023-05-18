@@ -1,10 +1,15 @@
 import "./App.css";
-
+import axios from "axios";
 function App() {
+  //change axios config base url
+
   return (
     <>
       <h1>SMIDGE</h1>
-      <div> © 2023 Smidge Project</div>
+      <h1>SMIDGE</h1>
+      <h1>SMIDGE</h1>
+      <h1>SMIDGE</h1>
+      <h1>SMIDGE</h1>
     </>
   );
 }
