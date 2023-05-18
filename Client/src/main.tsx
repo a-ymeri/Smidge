@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development"
-    ? "https://localhost:7001"
+    ? "http://localhost:7000"
     : "https://smidge.herokuapp.com";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

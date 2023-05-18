@@ -11,7 +11,13 @@ namespace Smidge
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder();
+            //var allowedOrigins = new string[] { "http://localhost:5173", "http://127.0.0.1:5173" };
+
+            //allow all origins
+            var allowedOrigins = new string[] { "*" };
+
+            builder.WebHost.UseUrls("http://localhost:7000");
 
             // Add services to the container.
 
@@ -23,7 +29,8 @@ namespace Smidge
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();   
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddCors();
 
             var app = builder.Build();
 
@@ -34,7 +41,14 @@ namespace Smidge
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(options =>
+            {
+                options.WithOrigins(allowedOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

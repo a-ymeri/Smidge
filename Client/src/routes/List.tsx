@@ -5,6 +5,7 @@ import {
   DataGrid,
   GridColDef,
   GridRenderCellParams,
+  GridRowHeightParams,
   GridRowId,
   GridTreeNodeWithRender,
   GridValueGetterParams,
@@ -14,6 +15,8 @@ import ResourceForm from "../components/ResourceForm";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material";
 
 export interface Resource {
   id: number;
@@ -30,15 +33,28 @@ export interface Resource {
 
 const columns: GridColDef[] = [
   { field: "title", headerName: "Title", width: 130 },
-  { field: "description", headerName: "Description", width: 400 },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 350,
+    renderCell: (params: GridRenderCellParams) => (
+      //multiline cell
+      <div style={{ whiteSpace: "pre-wrap", padding: 5 }}>{params.value}</div>
+    ),
+  },
   { field: "year", headerName: "Year", width: 130 },
   { field: "language", headerName: "Language", width: 130 },
   { field: "origins", headerName: "Origins", width: 130 },
-  { field: "targetAudience", headerName: "Target Audience", width: 130 },
+  {
+    field: "targetAudience",
+    headerName: "Target Audience",
+    width: 200,
+    //multiline text
+  },
   {
     field: "keywords",
     headerName: "Keywords",
-    width: 400,
+    width: 250,
     valueGetter: (params: GridValueGetterParams) =>
       params.row.keywords.join(", "),
   },
@@ -53,7 +69,7 @@ const columns: GridColDef[] = [
   {
     field: "link",
     headerName: "Link",
-    width: 230,
+    width: 200,
     renderCell: (params: GridRenderCellParams) => (
       <a href={params.value as string} target="_blank">
         {params.value}
@@ -70,6 +86,8 @@ export default function List() {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
+  const [widths, setWidths] = useState<number[]>([]);
+
   const selectedResource = resources.find(
     (resource) => resource.id === selectedRows[0]
   );
@@ -79,6 +97,14 @@ export default function List() {
     const fetchData = async () => {
       const result = await axios.get<Resource[]>("/api/resource");
       setResources(result.data);
+      //get text size of each column, set width to max
+      const widths = result.data.map((resource) => {
+        const values = Object.values(resource);
+        const lengths = values.map((value) => value.toString().length);
+        const maxLength = Math.max(...lengths);
+        return maxLength * 10;
+      });
+      setWidths(widths);
     };
     fetchData();
   }, []);
@@ -113,13 +139,37 @@ export default function List() {
     setResources([...resources, result.data]);
   };
 
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: "#8bc34a",
+  //       //custom light green
+
+  //     },
+  //   },
+  // });
+
   return (
-    <div style={{ position: "relative", minHeight: "90vh" }}>
+    // <ThemeProvider theme={theme}>
+    <div
+      style={{
+        position: "relative",
+        minHeight: "90vh",
+        backgroundColor: "#ecf8f8",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: 20,
+      }}
+    >
       <div style={{ textAlign: "left", marginBottom: 10 }}>
         <Button
           variant="contained"
           onClick={handleAddModalOpen}
-          color="success"
+          //color light green
+          style={{
+            backgroundColor: "#8bc34a",
+          }}
           startIcon={<AddIcon />}
         >
           Add new
@@ -182,8 +232,12 @@ export default function List() {
         />
       </div>
 
-      <div style={{ height: 400, width: 1200 }}>
+      <div style={{ height: 600, width: 1200 }}>
         <DataGrid
+          sx={{
+            bgcolor: "white",
+            boxShadow: 2,
+          }}
           rows={resources}
           columns={columns}
           autoPageSize
@@ -192,8 +246,10 @@ export default function List() {
             const ids: number[] = e.map((id) => parseInt(id.toString()));
             setSelectedRows(ids);
           }}
+          getRowHeight={() => "auto"}
         />
       </div>
     </div>
+    // </ThemeProvider>
   );
 }

@@ -22,46 +22,46 @@ namespace Smidge.Controllers
             _context = context;
         }
 
-        // GET: api/LinkCategory
+        // GET: api/ResourceCategory
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetLinkCategories()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            if (_context.LinkCategories == null)
+            if (_context.Categories == null)
             {
                 return NotFound();
             }
-            return await _context.LinkCategories.ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
-        // GET: api/LinkCategory/5
+        // GET: api/ResourceCategory/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetLinkCategory(int id)
+        public async Task<ActionResult<Category>> GetResourceCategory(int id)
         {
-            if (_context.LinkCategories == null)
+            if (_context.Categories == null)
             {
                 return NotFound();
             }
-            var linkCategory = await _context.LinkCategories.FindAsync(id);
+            var resourceCategory = await _context.Categories.FindAsync(id);
 
-            if (linkCategory == null)
+            if (resourceCategory == null)
             {
                 return NotFound();
             }
 
-            return linkCategory;
+            return resourceCategory;
         }
 
-        // PUT: api/LinkCategory/5
+        // PUT: api/ResourceCategory/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLinkCategory(int id, Category linkCategory)
+        public async Task<IActionResult> PutResourceCategory(int id, Category resourceCategory)
         {
-            if (id != linkCategory.Id)
+            if (id != resourceCategory.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(linkCategory).State = EntityState.Modified;
+            _context.Entry(resourceCategory).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace Smidge.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LinkCategoryExists(id))
+                if (!ResourceCategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -82,44 +82,44 @@ namespace Smidge.Controllers
             return NoContent();
         }
 
-        // POST: api/LinkCategory
+        // POST: api/ResourceCategory
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostLinkCategory(LinkCategoryDTO linkCategoryDTO)
+        public async Task<ActionResult<Category>> PostResourceCategory(ResourceCategoryDTO resourceCategoryDTO)
         {
-            if (_context.LinkCategories == null)
+            if (_context.Categories == null)
             {
-                return Problem("Entity set 'DataContext.LinkCategories'  is null.");
+                return Problem("Entity set 'DataContext.Categories'  is null.");
             }
-            var linkCategory = new Category(linkCategoryDTO.Name);
-            _context.LinkCategories.Add(linkCategory);
+            var resourceCategory = new Category(resourceCategoryDTO.Name);
+            _context.Categories.Add(resourceCategory);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetLinkCategory", new { id = linkCategory.Id }, linkCategory);
+            return CreatedAtAction("GetResourceCategory", new { id = resourceCategory.Id }, resourceCategory);
         }
 
-        // DELETE: api/LinkCategory/5
+        // DELETE: api/ResourceCategory/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLinkCategory(int id)
+        public async Task<IActionResult> DeleteResourceCategory(int id)
         {
-            if (_context.LinkCategories == null)
+            if (_context.Categories == null)
             {
                 return NotFound();
             }
-            var linkCategory = await _context.LinkCategories.FindAsync(id);
-            if (linkCategory == null)
+            var resourceCategory = await _context.Categories.FindAsync(id);
+            if (resourceCategory == null)
             {
                 return NotFound();
             }
 
-            _context.LinkCategories.Remove(linkCategory);
+            _context.Categories.Remove(resourceCategory);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool LinkCategoryExists(int id)
+        private bool ResourceCategoryExists(int id)
         {
-            return (_context.LinkCategories?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

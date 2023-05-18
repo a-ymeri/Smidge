@@ -1,11 +1,13 @@
 ﻿namespace Smidge.DTO
 {
-    public class LinkCategoryDTO
+    public class ResourceCategoryDTO
     {
         public string Name { get; set; }
 
-        public LinkCategoryDTO() { }
-        public LinkCategoryDTO(string name)
+        public ResourceCategoryDTO() { 
+            Name = string.Empty;
+        }
+        public ResourceCategoryDTO(string name)
         {
             Name = name;
         }
