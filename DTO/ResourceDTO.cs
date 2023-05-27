@@ -11,9 +11,10 @@
         public string Link { get; set; } = string.Empty;
         public string TargetAudience { get; set; } = string.Empty;
         public int Year { get; set; } = 0;
+        public string SocialMedia { get; set; } = string.Empty;
 
 
-        public RequestResourceDTO(string title, string description, string[] categories, string language, string[] keywords, string origins, string link, string targetAudience, int year)
+        public RequestResourceDTO(string title, string description, string[] categories, string language, string[] keywords, string origins, string link, string targetAudience, int year, string socialMedia)
         {
             Title = title;
             Description = description;
@@ -24,6 +25,7 @@
             Link = link;
             TargetAudience = targetAudience;
             Year = year;
+            SocialMedia = socialMedia;
         }
 
         public override string ToString()
@@ -46,10 +48,11 @@
         public string Link { get; set; } = string.Empty;
         public string TargetAudience { get; set; } = string.Empty;
         public int Year { get; set; } = 0;
+        public string SocialMedia { get; set; } = string.Empty;
 
 
 
-        public ResponseResourceDTO(int id, string title, string description, ICollection<string> categories, string language, ICollection<string> keywords, string origins, string link, string targetAudience, int year)
+        public ResponseResourceDTO(int id, string title, string description, ICollection<string> categories, string language, ICollection<string> keywords, string origins, string link, string targetAudience, int year, string socialMedia)
         {
             Id = id;
             Title = title;
@@ -61,6 +64,7 @@
             Link = link;
             TargetAudience = targetAudience;
             Year = year;
+            SocialMedia = socialMedia;
         }
     }
 }

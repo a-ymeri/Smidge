@@ -17,6 +17,7 @@ namespace Smidge.Models
         public string Link { get; set; }
         public string TargetAudience { get; set; }
         public int Year { get; set; }
+        public string SocialMedia { get; set; }
 
 
         public Resource()
@@ -29,10 +30,11 @@ namespace Smidge.Models
             Link = string.Empty;
             TargetAudience = string.Empty;
             Year = 0;
+            SocialMedia = string.Empty;
             ResourceKeywords = new List<ResourceKeyword>();
         }
 
-        public Resource(string title, string description, string language, string origins, string link, string targetAudience, int year) { 
+        public Resource(string title, string description, string language, string origins, string link, string targetAudience, int year, string socialMedia) {
             ResourceCategories = new List<ResourceCategory>();
             Title = title;
             Description = description;
@@ -42,6 +44,7 @@ namespace Smidge.Models
             TargetAudience = targetAudience;
             Year = year;
             ResourceKeywords = new List<ResourceKeyword>();
+            SocialMedia = socialMedia;
         }
 
         public override string ToString()

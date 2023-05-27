@@ -27,8 +27,9 @@ export interface Resource {
   origins: string;
   targetAudience: string;
   keywords: string[];
-  categories: string[];
+  category: string;
   link: string;
+  socialMedia: string;
 }
 
 const columns: GridColDef[] = [
@@ -76,6 +77,7 @@ const columns: GridColDef[] = [
       </a>
     ),
   },
+  { field: "socialMedia", headerName: "Social Media Type", width: 200 },
 ];
 
 export default function List() {

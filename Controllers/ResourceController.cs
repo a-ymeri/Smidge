@@ -39,17 +39,7 @@ namespace Smidge.Controller
             var responseResourceDTOs = new List<ResponseResourceDTO>();
             foreach (var resource in resources)
             {
-                var responseResourceDTO = new ResponseResourceDTO(
-                    id: resource.Id,
-                    title: resource.Title,
-                    description: resource.Description,
-                    categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
-                    keywords: resource.ResourceKeywords.Select(rc => rc.Keyword.Name).ToList(),
-                    language: resource.Language,
-                    origins: resource.Origins,
-                    targetAudience: resource.TargetAudience,
-                    year: resource.Year,
-                    link: resource.Link);
+                var responseResourceDTO = ResourceToResponseResourceDTO(resource);
                 responseResourceDTOs.Add(responseResourceDTO);
             }
             return responseResourceDTOs;
@@ -70,18 +60,7 @@ namespace Smidge.Controller
                 return NotFound();
             }
 
-            var responseResourceDTO = new ResponseResourceDTO(
-                id: resource.Id,
-                title: resource.Title,
-                description: resource.Description,
-                language: resource.Language,
-                origins: resource.Origins,
-                targetAudience: resource.TargetAudience,
-                year: resource.Year,
-                link: resource.Link,
-                categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
-                keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList()
-            );
+            var responseResourceDTO = ResourceToResponseResourceDTO(resource);
 
             return responseResourceDTO;
 
@@ -176,7 +155,9 @@ namespace Smidge.Controller
                 link: body.Link,
                 origins: body.Origins,
                 targetAudience: body.TargetAudience,
-                year: body.Year);
+                year: body.Year,
+                socialMedia: body.SocialMedia
+                );
 
 
             if (dataContext.Resources == null)
@@ -226,18 +207,7 @@ namespace Smidge.Controller
             return CreatedAtAction(
                 "GetResource",
                 new { id = resource.Id },
-                new ResponseResourceDTO(
-                    id: resource.Id,
-                    title: resource.Title,
-                    description: resource.Description,
-                    language: resource.Language,
-                    origins: resource.Origins,
-                    targetAudience: resource.TargetAudience,
-                    year: resource.Year,
-                    link: resource.Link,
-                    categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
-                    keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList()
-                    ));
+                ResourceToResponseResourceDTO(resource));
         }
 
         // DELETE: api/Resources/5
@@ -293,8 +263,11 @@ namespace Smidge.Controller
                 year: resource.Year,
                 link: resource.Link,
                 categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
-                keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList()
+                keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList(),
+                socialMedia: resource.SocialMedia
                 );
         }
+
+
     }
 }

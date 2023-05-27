@@ -10,36 +10,46 @@ import Footer from "./components/Footer.tsx";
 
 import Navbar from "./components/Navbar.tsx";
 
+const Page = ({ children }: { children: React.ReactNode }) => (
+  <>
+    <Navbar />
+    {children}
+    <Footer />
+  </>
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <>
-        <Navbar />
+      <Page>
         <App />
-        <Footer />
-      </>
+      </Page>
     ),
   },
 
   {
     path: "/home",
     element: (
-      <>
-        <Navbar />
+      <Page>
         <App />
-        <Footer />
-      </>
+      </Page>
     ),
   },
   {
     path: "/list",
     element: (
-      <>
-        <Navbar />
+      <Page>
         <List />
-        <Footer />
-      </>
+      </Page>
+    ),
+  },
+  {
+    path: "/about",
+    element: (
+      <Page>
+        <App />
+      </Page>
     ),
   },
 ]);

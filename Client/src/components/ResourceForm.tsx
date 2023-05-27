@@ -6,9 +6,15 @@ import {
   DialogActions,
   Button,
   TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Grid,
 } from "@mui/material";
 import ChippedInput from "./ChippedInput";
 import { Resource } from "../routes/List";
+import { SelectChangeEvent } from "@mui/material/Select/SelectInput";
 
 type Props = {
   open: boolean;
@@ -20,7 +26,8 @@ type Props = {
 function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   //set title to props.title if it exists, otherwise set it to ""
   const [title, setTitle] = useState("");
-  const [categories, setCategories] = useState<string[]>([]);
+  const [category, setCategory] = useState("");
+  const [otherCategory, setOtherCategory] = useState(""); //only used if category is "Other"
   const [description, setDescription] = useState("");
   const [year, setYear] = useState(2023);
   const [language, setLanguage] = useState("");
@@ -28,11 +35,12 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   const [targetAudience, setTargetAudience] = useState("");
   const [link, setLink] = useState("");
   const [keywords, setKeywords] = useState<string[]>([]);
+  const [socialMedia, setSocialMedia] = useState("");
 
   useEffect(() => {
     if (props.editElement) {
       setTitle(props.editElement.title);
-      setCategories(props.editElement.categories);
+      setCategory(props.editElement.category);
       setDescription(props.editElement.description);
       setYear(props.editElement.year);
       setLanguage(props.editElement.language);
@@ -40,13 +48,14 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       setTargetAudience(props.editElement.targetAudience);
       setLink(props.editElement.link);
       setKeywords(props.editElement.keywords);
+      setSocialMedia(props.editElement.socialMedia);
     }
   }, [props.editElement]);
 
   const testPopulate = () => {
     const rand_int = Math.floor(Math.random() * 1000);
     setTitle("Title " + rand_int);
-    setCategories(["Category " + rand_int]);
+    setCategory("Category " + rand_int);
     setDescription("Description " + rand_int);
     setYear(2020);
     setLanguage("Language " + rand_int);
@@ -54,6 +63,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     setTargetAudience("Target Audience " + rand_int);
     setLink("Link " + rand_int);
     setKeywords(["Keyword " + rand_int]);
+    setSocialMedia("Social Media Type " + rand_int);
   };
 
   const handleSubmitCallback = () => {
@@ -61,7 +71,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     const data_object: Resource = {
       id: 0,
       title,
-      categories,
+      category,
       description,
       year,
       keywords,
@@ -69,12 +79,13 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       origins,
       targetAudience,
       link,
+      socialMedia,
     };
 
     handleSubmit(data_object);
 
     setTitle("");
-    setCategories([]);
+    setCategory("");
     setDescription("");
     setYear(2023);
     setLanguage("");
@@ -82,7 +93,24 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     setTargetAudience("");
     setLink("");
     setKeywords([]);
+    setSocialMedia("");
     handleClose();
+  };
+
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    const selectedCategory = event.target.value as string;
+    if (selectedCategory === "Other") {
+      setCategory(selectedCategory);
+    } else {
+      setCategory(selectedCategory);
+      setOtherCategory(""); // Clear the otherCategory value if it was previously set
+    }
+  };
+
+  const handleOtherCategoryChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setOtherCategory(event.target.value);
   };
 
   return (
@@ -106,12 +134,37 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <ChippedInput
-            initialArray={categories}
-            setArray={setCategories}
-            placeholder={"Add a new category"}
-            label={"Category"}
-          />
+          <FormControl
+            fullWidth
+            sx={{ mt: 2, display: "flex", flexDirection: "row" }}
+          >
+            <InputLabel id="category-label">Category</InputLabel>
+            <Select
+              labelId="category-label"
+              id="category"
+              value={category}
+              label="Category"
+              onChange={handleCategoryChange}
+              style={{
+                width: category === "Other" ? "50%" : "100%",
+              }}
+            >
+              <MenuItem value={"Far-Right"}>Far-Right</MenuItem>
+              <MenuItem value={"Religious"}>Religious</MenuItem>
+              <MenuItem value={"Conspiracy"}>Conspiracy</MenuItem>
+              <MenuItem value={"Anti-Vax"}>Anti-Vax</MenuItem>
+              <MenuItem value={"Other"}>Other</MenuItem>
+            </Select>
+
+            {category === "Other" && (
+              <TextField
+                style={{ width: "45%", marginLeft: "5%" }}
+                label="Please specify category"
+                value={otherCategory}
+                onChange={handleOtherCategoryChange}
+              />
+            )}
+          </FormControl>
           <TextField
             label="Description of the video"
             fullWidth
@@ -169,6 +222,24 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
             value={link}
             onChange={(e) => setLink(e.target.value)}
           />
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel id="social-media-type-label">
+              Social Media Type
+            </InputLabel>
+            <Select
+              labelId="social-media-type-label"
+              id="social-media-type"
+              value={socialMedia}
+              label="Social Media Type"
+              onChange={(e) => setSocialMedia(e.target.value)}
+            >
+              <MenuItem value={"YouTube"}>YouTube</MenuItem>
+              <MenuItem value={"Facebook"}>Facebook</MenuItem>
+              <MenuItem value={"Twitter"}>Twitter</MenuItem>
+              <MenuItem value={"TikTok"}>TikTok</MenuItem>
+              <MenuItem value={"Instagram"}>Instagram</MenuItem>
+            </Select>
+          </FormControl>
         </form>
       </DialogContent>
       <DialogActions

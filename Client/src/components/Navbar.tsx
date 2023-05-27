@@ -7,6 +7,7 @@ export default function Navbar() {
   const routes = [
     { path: "/", name: "Dashboard" },
     { path: "/list", name: "List" },
+    { path: "/about", name: "About" },
   ];
   // const elements = ["Dashboard", "List"];
   return (
