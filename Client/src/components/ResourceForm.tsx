@@ -55,7 +55,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   const testPopulate = () => {
     const rand_int = Math.floor(Math.random() * 1000);
     setTitle("Title " + rand_int);
-    setCategory("Category " + rand_int);
+    setCategory("Religious");
     setDescription("Description " + rand_int);
     setYear(2020);
     setLanguage("Language " + rand_int);
@@ -63,7 +63,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     setTargetAudience("Target Audience " + rand_int);
     setLink("Link " + rand_int);
     setKeywords(["Keyword " + rand_int]);
-    setSocialMedia("Social Media Type " + rand_int);
+    setSocialMedia("YouTube");
   };
 
   const handleSubmitCallback = () => {
@@ -81,6 +81,10 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       link,
       socialMedia,
     };
+
+    if (otherCategory !== "") {
+      data_object.category = otherCategory;
+    }
 
     handleSubmit(data_object);
 

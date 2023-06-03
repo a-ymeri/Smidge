@@ -9,25 +9,15 @@ namespace Smidge.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Resource> Resources { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        //public DbSet<Category> Categories { get; set; }
         public DbSet<Keyword> Keywords { get; set; }
 
-        public DbSet<ResourceCategory> ResourceCategories { get; set; }
+        //public DbSet<ResourceCategory> ResourceCategories { get; set; }
         public DbSet<ResourceKeyword> ResourceKeywords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ResourceCategory>()
-                .HasKey(lc => new { lc.ResourceId, lc.CategoryId });
-            modelBuilder.Entity<ResourceCategory>()
-                .HasOne(lc => lc.Resource)
-                .WithMany(r => r.ResourceCategories)
-                .HasForeignKey(lc => lc.ResourceId);
-            modelBuilder.Entity<ResourceCategory>()
-                .HasOne(lc => lc.Category)
-                .WithMany(c => c.ResourceCategories)
-                .HasForeignKey(lc => lc.CategoryId);
-
+         
             modelBuilder.Entity<ResourceKeyword>()
                 .HasKey(lc => new { lc.ResourceId, lc.KeywordId });
             modelBuilder.Entity<ResourceKeyword>()

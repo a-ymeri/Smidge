@@ -34,8 +34,9 @@ namespace Smidge.Controller
                 return NotFound();
             }
 
-            var resources = await dataContext.Resources.Include(r => r.ResourceCategories).ThenInclude(rc => rc.Category)
-                            .Include(r => r.ResourceKeywords).ThenInclude(rk => rk.Keyword).ToListAsync();
+            //query resources, include keywords
+            var resources = await dataContext.Resources.Include(r => r.ResourceKeywords)
+                .ThenInclude(rk => rk.Keyword).ToListAsync();
             var responseResourceDTOs = new List<ResponseResourceDTO>();
             foreach (var resource in resources)
             {
@@ -73,7 +74,6 @@ namespace Smidge.Controller
         {
 
             var resource = await dataContext.Resources
-                     .Include(r => r.ResourceCategories)
                      .Include(r => r.ResourceKeywords)
                      .FirstOrDefaultAsync(r => r.Id == id);
 
@@ -82,6 +82,8 @@ namespace Smidge.Controller
                 return NotFound();
             }
 
+
+
             resource.Title = requestResourceDTO.Title;
             resource.Description = requestResourceDTO.Description;
             resource.Language = requestResourceDTO.Language;
@@ -89,19 +91,7 @@ namespace Smidge.Controller
             resource.Origins = requestResourceDTO.Origins;
             resource.TargetAudience = requestResourceDTO.TargetAudience;
             resource.Year = requestResourceDTO.Year;
-
-            //get categories from db
-            var categories = dataContext.Categories.Where(c => requestResourceDTO.Categories.Contains(c.Name)).ToList();
-            //get categories to be added
-            var categoriesToBeAdded = requestResourceDTO.Categories.Where(c => !categories.Select(c => c.Name).Contains(c)).ToList();
-            //add categories to db
-            foreach (var category in categoriesToBeAdded)
-            {
-                var newCategory = new Category(name: category);
-                dataContext.Categories.Add(newCategory);
-                categories.Add(newCategory);
-            }
-
+            resource.Category = requestResourceDTO.Category;
 
             //get keywords from db
             var keywords = dataContext.Keywords.Where(k => requestResourceDTO.Keywords.Contains(k.Name)).ToList();
@@ -115,13 +105,6 @@ namespace Smidge.Controller
                 keywords.Add(newKeyword);
             }
 
-            var resourceCategories = categories.Select(c => new ResourceCategory
-            {
-                Category = c,
-                Resource = resource,
-                CategoryId = c.Id
-            }).ToList();
-
 
             var resourceKeywords = keywords.Select(k => new ResourceKeyword
             {
@@ -131,9 +114,9 @@ namespace Smidge.Controller
             }).ToList();
 
             resource.ResourceKeywords.Clear();
-            resource.ResourceCategories.Clear();
+            //resource.ResourceCategories.Clear();
 
-            resource.ResourceCategories = resourceCategories;
+            //resource.ResourceCategories = resourceCategories;
             resource.ResourceKeywords = resourceKeywords;
 
 
@@ -150,6 +133,7 @@ namespace Smidge.Controller
         public async Task<ActionResult<ResponseResourceDTO>> PostResource(RequestResourceDTO body)
         {
             var resource = new Resource(title: body.Title,
+                category: body.Category,
                 description: body.Description,
                 language: body.Language,
                 link: body.Link,
@@ -164,15 +148,6 @@ namespace Smidge.Controller
             {
                 return Problem("Entity set 'DataContext.Resources'  is null.");
             }
-            var categories = dataContext.Categories.Where(c => body.Categories.Contains(c.Name)).ToList();
-            var categoriesToBeAdded = body.Categories.Where(c => !categories.Select(c => c.Name).Contains(c)).ToList();
-
-            foreach (var category in categoriesToBeAdded)
-            {
-                var newCategory = new Category(name: category);
-                dataContext.Categories.Add(newCategory);
-                categories.Add(newCategory);
-            }
 
             var keywords = dataContext.Keywords.Where(k => body.Keywords.Contains(k.Name)).ToList();
             var keywordsToBeAdded = body.Keywords.Where(k => !keywords.Select(k => k.Name).Contains(k)).ToList();
@@ -183,13 +158,6 @@ namespace Smidge.Controller
                 keywords.Add(newKeyword);
             }
 
-            var resourceCategories = categories.Select(c => new ResourceCategory
-            {
-                Category = c,
-                Resource = resource,
-                CategoryId = c.Id
-            }).ToList();
-
 
             var resourceKeywords = keywords.Select(k => new ResourceKeyword
             {
@@ -198,7 +166,7 @@ namespace Smidge.Controller
                 KeywordId = k.Id
             }).ToList();
 
-            resource.ResourceCategories = resourceCategories;
+            //resource.ResourceCategories = resourceCategories;
             resource.ResourceKeywords = resourceKeywords;
 
             dataContext.Resources.Add(resource);
@@ -262,7 +230,8 @@ namespace Smidge.Controller
                 targetAudience: resource.TargetAudience,
                 year: resource.Year,
                 link: resource.Link,
-                categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
+                category: resource.Category,
+                //categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
                 keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList(),
                 socialMedia: resource.SocialMedia
                 );

@@ -10,7 +10,8 @@ namespace Smidge.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public ICollection<ResourceCategory> ResourceCategories { get; set; }
+        //public ICollection<ResourceCategory> ResourceCategories { get; set; }
+        public string Category { get; set; }
         public ICollection<ResourceKeyword> ResourceKeywords { get; set; }
         public string Language { get; set; }
         public string Origins { get; set; }
@@ -22,7 +23,7 @@ namespace Smidge.Models
 
         public Resource()
         {
-            ResourceCategories = new List<ResourceCategory>();
+            Category = string.Empty;
             Title = string.Empty;
             Description = string.Empty;
             Language = string.Empty;
@@ -34,8 +35,8 @@ namespace Smidge.Models
             ResourceKeywords = new List<ResourceKeyword>();
         }
 
-        public Resource(string title, string description, string language, string origins, string link, string targetAudience, int year, string socialMedia) {
-            ResourceCategories = new List<ResourceCategory>();
+        public Resource(string title, string description, string category, string language, string origins, string link, string targetAudience, int year, string socialMedia) {
+            Category = category;
             Title = title;
             Description = description;
             Language = language;
@@ -49,7 +50,7 @@ namespace Smidge.Models
 
         public override string ToString()
         {
-            return $"Title: {Title}, Description: {Description}, Categories: {ResourceCategories}, Language: {Language}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year}";
+            return $"Title: {Title}, Description: {Description}, Category: {Category}, Language: {Language}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year}";
         }
 
     }

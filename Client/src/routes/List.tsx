@@ -60,13 +60,10 @@ const columns: GridColDef[] = [
       params.row.keywords.join(", "),
   },
   {
-    field: "categories",
-    headerName: "Categories",
+    field: "category",
+    headerName: "Category",
     width: 250,
-    valueGetter: (params: GridValueGetterParams) =>
-      params.row.categories.join(", "),
   },
-  //display link as a link
   {
     field: "link",
     headerName: "Link",
