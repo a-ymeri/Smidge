@@ -16,6 +16,47 @@ import ChippedInput from "./ChippedInput";
 import { Resource } from "../routes/List";
 import { SelectChangeEvent } from "@mui/material/Select/SelectInput";
 
+const socialMediaTypes = [
+  "Youtube",
+  "Facebook",
+  "Twitter",
+  "TikTok",
+  "Instagram",
+];
+const categories = [
+  "Far-Right",
+  "Religious",
+  "Conspiracy",
+  "Anti-Vax",
+  "Other",
+];
+const languages = [
+  "Bulgarian",
+  "Croatian",
+  "Czech",
+  "Danish",
+  "Dutch",
+  "English",
+  "Estonian",
+  "Finnish",
+  "French",
+  "German",
+  "Greek",
+  "Hungarian",
+  "Irish",
+  "Italian",
+  "Latvian",
+  "Lithuanian",
+  "Maltese",
+  "Polish",
+  "Portuguese",
+  "Romanian",
+  "Slovak",
+  "Slovenian",
+  "Spanish",
+  "Swedish",
+];
+
 type Props = {
   open: boolean;
   handleClose: () => void;
@@ -153,11 +194,9 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
                 width: category === "Other" ? "50%" : "100%",
               }}
             >
-              <MenuItem value={"Far-Right"}>Far-Right</MenuItem>
-              <MenuItem value={"Religious"}>Religious</MenuItem>
-              <MenuItem value={"Conspiracy"}>Conspiracy</MenuItem>
-              <MenuItem value={"Anti-Vax"}>Anti-Vax</MenuItem>
-              <MenuItem value={"Other"}>Other</MenuItem>
+              {categories.map((category) => (
+                <MenuItem value={category}>{category}</MenuItem>
+              ))}
             </Select>
 
             {category === "Other" && (
@@ -194,14 +233,20 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
             placeholder={"Add key words"}
             label={"Key words"}
           />
-          <TextField
-            label="Language"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-          />
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel id="language-label">Language</InputLabel>
+            <Select
+              labelId="language-label"
+              id="language"
+              value={language}
+              label="language"
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              {languages.map((language) => (
+                <MenuItem value={language}>{language}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             label="Origins (geographic)"
             fullWidth
@@ -237,11 +282,9 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
               label="Social Media Type"
               onChange={(e) => setSocialMedia(e.target.value)}
             >
-              <MenuItem value={"YouTube"}>YouTube</MenuItem>
-              <MenuItem value={"Facebook"}>Facebook</MenuItem>
-              <MenuItem value={"Twitter"}>Twitter</MenuItem>
-              <MenuItem value={"TikTok"}>TikTok</MenuItem>
-              <MenuItem value={"Instagram"}>Instagram</MenuItem>
+              {socialMediaTypes.map((socialMedia) => (
+                <MenuItem value={socialMedia}>{socialMedia}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </form>

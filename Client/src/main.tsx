@@ -5,9 +5,11 @@ import { Divider } from "@mui/material";
 import axios from "axios";
 import App from "./App.tsx";
 import "./index.css";
-import List from "./routes/List.tsx";
-import Footer from "./components/Footer.tsx";
 
+import List from "./routes/List.tsx";
+import ReportPage from "./routes/ReportPage.tsx";
+
+import Footer from "./components/Footer.tsx";
 import Navbar from "./components/Navbar.tsx";
 
 const Page = ({ children }: { children: React.ReactNode }) => (
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
     element: (
       <Page>
         <App />
+      </Page>
+    ),
+  },
+  {
+    path: "/report",
+    element: (
+      <Page>
+        <ReportPage></ReportPage>
       </Page>
     ),
   },

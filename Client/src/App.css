@@ -96,6 +96,17 @@ body {
   font: normal normal 500 17px/1.5em "Montserrat Light", sans-serif;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
 .nav-link:hover {
   color: var(--cyan);
 }
@@ -187,4 +198,35 @@ body {
 .mail-link:hover {
   /* text-decoration: underline; */
   color: inherit;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: -10px;
+  background-color: white;
+  opacity: 0.9;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  min-width: 172px;
+}
+
+.dropdown-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-link {
+  color: #333;
+  text-decoration: none;
+  padding: 5px 20px;
+}
+
+.dropdown-link:hover {
+  background-color: white;
+  color: var(--cyan);
+  transition: var(--trans, color 0.4s ease 0s);
 }

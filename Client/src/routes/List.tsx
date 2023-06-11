@@ -154,7 +154,7 @@ export default function List() {
       style={{
         position: "relative",
         minHeight: "90vh",
-        backgroundColor: "#ecf8f8",
+        backgroundColor: "#f5fafa",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
