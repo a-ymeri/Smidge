@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import ReactWordcloud from "react-wordcloud";
 import WordCloud from "./components/WordCloud";
 import Map from "./components/Map";
+import CategoryCount from "./components/CategoryCount";
+import SocialMediaBarChart from "./components/Barchart";
+
+import { Row, Col } from "react-bootstrap";
+
 function App() {
   //change axios config base url
   return (
@@ -11,14 +16,35 @@ function App() {
       style={{
         //rgb
         background: "#f5fafa",
-        width: "100%",
         padding: 25,
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
       }}
     >
-      <WordCloud />
-      <Map />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <Row style={{ width: "100%" }}>
+          <Col md={6} sm={12}>
+            <CategoryCount />
+          </Col>
+          <Col md={6} sm={12}>
+            <SocialMediaBarChart />
+          </Col>
+        </Row>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <WordCloud />
+        <Map />
+      </div>
     </div>
   );
 }

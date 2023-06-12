@@ -27,7 +27,9 @@ export default function ReportPage() {
         display: "flex",
         justifyContent: "center",
         textAlign: "left",
-        marginBottom: "15px",
+        paddingBottom: "35px",
+        paddingTop: "15px",
+        background: "#f5fafa",
       }}
     >
       <form style={{ width: "50%" }} onSubmit={handleSubmit}>

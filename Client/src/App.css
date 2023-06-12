@@ -3,6 +3,10 @@ body {
   --txt: #0a4455;
   --trans: color 0.4s ease 0s;
   margin: 0;
+  height: 100%;
+}
+html {
+  height: 100%;
 }
 .logo {
   height: 6em;
@@ -229,4 +233,78 @@ body {
   background-color: white;
   color: var(--cyan);
   transition: var(--trans, color 0.4s ease 0s);
+}
+
+.rounded-component {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 600px;
+  border: 1px solid #ddd;
+}
+
+.category-breakdown {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.square-components {
+  display: flex;
+  justify-content: space-between;
+}
+
+.square-component {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.count-number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.icon-background {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  padding: 5px;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.count-number {
+  font-size: 20px;
+}
+
+.category-breakdown {
+  font-weight: bold;
+  margin-bottom: 10px;
 }

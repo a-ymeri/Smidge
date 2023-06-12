@@ -64,6 +64,9 @@ csx/
 *.cspkg.*
 *.csx.*
 
+node_modules
+Client/node_modules
+
 # Visual Studio cache files
 # files ending in .cache can be added to .gitignore as well
 #*.cache

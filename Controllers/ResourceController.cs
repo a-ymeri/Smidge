@@ -214,6 +214,18 @@ namespace Smidge.Controller
 
         }
 
+        [HttpGet("Wordcloud")]
+        public async Task<IActionResult> GetWordcloud()
+        {
+            var resources = await dataContext.Resources
+                .Include(r => r.ResourceKeywords)
+                .ThenInclude(rk => rk.Keyword)
+                .ToListAsync();
+            var keywords = resources.SelectMany(r => r.ResourceKeywords).Select(rk => rk.Keyword).ToList();
+            var wordcloud = keywords.GroupBy(k => k.Name).Select(k => new WordcloudDTO(k.Key, k.Count())).ToList();
+            return Ok(wordcloud);
+        }
+
         private bool ResourceExists(int id)
         {
             return (dataContext.Resources?.Any(e => e.Id == id)).GetValueOrDefault();
