@@ -31,6 +31,7 @@ const categories = [
   "Other",
 ];
 const languages = [
+  "Albanian",
   "Bulgarian",
   "Croatian",
   "Czech",

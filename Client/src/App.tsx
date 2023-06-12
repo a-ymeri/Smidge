@@ -14,7 +14,6 @@ function App() {
   return (
     <div
       style={{
-        //rgb
         background: "#f5fafa",
         padding: 25,
         display: "flex",
@@ -32,18 +31,15 @@ function App() {
             <CategoryCount />
           </Col>
           <Col md={6} sm={12}>
+            <WordCloud />
+          </Col>
+          <Col md={6} sm={12}>
             <SocialMediaBarChart />
           </Col>
+          <Col md={6} sm={12}>
+            <Map />
+          </Col>
         </Row>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <WordCloud />
-        <Map />
       </div>
     </div>
   );

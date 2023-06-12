@@ -57,7 +57,8 @@ export default function WordCloud() {
     rotations: 1,
     rotationAngles: [0],
     fontFamily: "verdana",
-    //disable hover
+    // disable hover
+    
 
     // colors: [
     //   "#333333",
@@ -90,19 +91,17 @@ export default function WordCloud() {
     <>
       <div
         style={{
-          maxWidth: 500,
+          maxWidth: 750,
           background: "#fff",
           borderRadius: "15px",
-          margin: 25,
           border: "1px solid #ddd",
-          padding: 25,
           // boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
         }}
       >
         <div
           style={{
-            width: 500,
-            height: 250,
+            width: 700,
+            height: 340,
           }}
         >
           <ReactWordcloud words={mockData} options={options} />
