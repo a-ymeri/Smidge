@@ -8,6 +8,7 @@ import CategoryCount from "./components/CategoryCount";
 import SocialMediaBarChart from "./components/Barchart";
 
 import { Row, Col } from "react-bootstrap";
+import List from "./routes/List";
 
 function App() {
   //change axios config base url
@@ -23,7 +24,7 @@ function App() {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
         }}
       >
         <Row style={{ width: "85%", margin: "auto" }}>
@@ -36,6 +37,11 @@ function App() {
             <WordCloud />
             <br></br>
             <SocialMediaBarChart />
+          </Col>
+        </Row>
+        <Row style={{ width: "85%", margin: "auto" }}>
+          <Col md={12} sm={12}>
+            <List columns={["title", "description", "category", "link"]} />
           </Col>
         </Row>
       </div>

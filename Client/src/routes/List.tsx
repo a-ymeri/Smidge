@@ -32,7 +32,7 @@ export interface Resource {
   socialMedia: string;
 }
 
-const columns: GridColDef[] = [
+let columns: GridColDef[] = [
   { field: "title", headerName: "Title", width: 130 },
   {
     field: "description",
@@ -77,7 +77,11 @@ const columns: GridColDef[] = [
   { field: "socialMedia", headerName: "Social Media Type", width: 200 },
 ];
 
-export default function List() {
+interface Props {
+  columns?: string[];
+}
+
+export default function List(props: Props) {
   const [resources, setResources] = useState<Resource[]>([]);
 
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
@@ -86,6 +90,10 @@ export default function List() {
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   const [widths, setWidths] = useState<number[]>([]);
+
+  if (props.columns) {
+    columns = columns.filter((column) => props.columns?.includes(column.field));
+  }
 
   const selectedResource = resources.find(
     (resource) => resource.id === selectedRows[0]
