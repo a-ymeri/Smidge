@@ -26,18 +26,16 @@ function App() {
           flexDirection: "row",
         }}
       >
-        <Row style={{ width: "100%" }}>
+        <Row style={{ width: "85%", margin: "auto" }}>
           <Col md={6} sm={12}>
             <CategoryCount />
+            <br></br>
+            <Map />
           </Col>
           <Col md={6} sm={12}>
             <WordCloud />
-          </Col>
-          <Col md={6} sm={12}>
+            <br></br>
             <SocialMediaBarChart />
-          </Col>
-          <Col md={6} sm={12}>
-            <Map />
           </Col>
         </Row>
       </div>

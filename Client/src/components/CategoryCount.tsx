@@ -5,18 +5,29 @@ import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import ChurchOutlinedIcon from "@mui/icons-material/ChurchOutlined";
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 
+import { Row, Col } from "react-bootstrap";
 const CategoryCount: React.FC = () => {
   return (
+    // <Row>
     <div className="rounded-component" style={{ width: "100%" }}>
-      <div className="category-breakdown">Category breakdown:</div>
+      <div className="category-breakdown">Category breakdown</div>
+      <div className="category-breakdownsub">
+        {" "}
+        A statistical overview of records categorized by themes
+      </div>
       <div className="square-components">
+        {/* <Col md={3} sm={6}> */}
         <div
           className="square-component"
           style={{ backgroundColor: "#ffe2e6" }}
         >
           <div
             className="icon-background"
-            style={{ backgroundColor: "#fa5a7c", marginLeft: "-70px", marginBottom: "25px" }}
+            style={{
+              backgroundColor: "#fa5a7c",
+              marginLeft: "-70px",
+              marginBottom: "25px",
+            }}
           >
             <GavelOutlinedIcon className="icon" sx={{ color: "white" }} />
           </div>
@@ -27,14 +38,21 @@ const CategoryCount: React.FC = () => {
             <div className="textCategory">Far-Right</div>
           </div>
         </div>
+        {/* </Col> */}
+        {/* <Col md={3} sm={6}> */}
         <div
           className="square-component"
           style={{ backgroundColor: "#fff4de" }}
         >
-          <div className="icon-background"
-           style={{ backgroundColor: "#ff947a", marginLeft: "-70px", marginBottom: "25px" }}
+          <div
+            className="icon-background"
+            style={{
+              backgroundColor: "#ff947a",
+              marginLeft: "-70px",
+              marginBottom: "25px",
+            }}
           >
-            <ChurchOutlinedIcon className="icon" sx={{ color: "white" }}/>
+            <ChurchOutlinedIcon className="icon" sx={{ color: "white" }} />
           </div>
           <div className="content">
             <div className="count-number">
@@ -43,13 +61,24 @@ const CategoryCount: React.FC = () => {
             <div className="textCategory">Religious</div>
           </div>
         </div>
+        {/* </Col> */}
+        {/* <Col md={3} sm={6}> */}
         <div
           className="square-component"
           style={{ backgroundColor: "#dcfce7" }}
         >
-          <div className="icon-background"
-           style={{ backgroundColor: "#3cd856", marginLeft: "-70px", marginBottom: "25px" }}>
-            <VisibilityOffOutlinedIcon className="icon" sx={{ color: "white" }}/>
+          <div
+            className="icon-background"
+            style={{
+              backgroundColor: "#3cd856",
+              marginLeft: "-70px",
+              marginBottom: "25px",
+            }}
+          >
+            <VisibilityOffOutlinedIcon
+              className="icon"
+              sx={{ color: "white" }}
+            />
           </div>
           <div className="content">
             <div className="count-number">
@@ -58,13 +87,21 @@ const CategoryCount: React.FC = () => {
             <div className="textCategory">Conspiracy</div>
           </div>
         </div>
+        {/* </Col> */}
+        {/* <Col md={3} sm={6}> */}
         <div
           className="square-component"
           style={{ backgroundColor: "#f4e8ff" }}
         >
-          <div className="icon-background"
-           style={{ backgroundColor: "#bf83ff", marginLeft: "-70px", marginBottom: "25px" }}>
-            <VaccinesOutlinedIcon className="icon" sx={{ color: "white" }}/>
+          <div
+            className="icon-background"
+            style={{
+              backgroundColor: "#bf83ff",
+              marginLeft: "-70px",
+              marginBottom: "25px",
+            }}
+          >
+            <VaccinesOutlinedIcon className="icon" sx={{ color: "white" }} />
           </div>
           <div className="content">
             <div className="count-number">
@@ -73,8 +110,10 @@ const CategoryCount: React.FC = () => {
             <div className="textCategory">Anti-Vax</div>
           </div>
         </div>
+        {/* </Col> */}
       </div>
     </div>
+    // </Row>
   );
 };
 

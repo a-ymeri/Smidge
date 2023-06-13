@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -9,20 +9,28 @@ import {
 import europeData from "../assets/europe.json";
 
 const Map = () => {
+  console.log(europeData);
+  useEffect(() => {
+    //give random value to each country
+    europeData.features.forEach((country: any) => {
+      country.properties.value = Math.floor(Math.random() * 100);
+    });
+    // console.log(europeData.features);
+  }, []);
   return (
     <div
+      className="rounded-component"
       style={{
-        width: "400px",
-        height: "400px",
-        // maxWidth: "40%",
-        // maxHeight: 800,
-        background: "#fff",
-        padding: 25,
-        margin: 25,
-        borderRadius: "20px",
-        border: "1px solid #ddd",
+        display: "flex",
+        width: "100%",
+        maxHeight: "700px",
+        flexDirection: "column",
       }}
     >
+      <div className="category-breakdown">Map</div>
+      <div className="category-breakdownsub">
+        Visualizing the geographic distribution of data records
+      </div>
       <ComposableMap
         width={800}
         height={800}
@@ -39,21 +47,22 @@ const Map = () => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                fill="#2f455c"
                 stroke="#EAEAEC"
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
                 style={{
-                  default: {
-                    fill: "#D6D6DA",
+                  hover: {
+                    fill: "#2f455c",
                     outline: "none",
                   },
-                  hover: {
-                    fill: "#F53",
+                  default: {
+                    // fill: "#54799f",
+                    fill: `rgb(84,121,159, ${
+                      geo.properties.value / 100 + 0.3
+                    })`,
+
                     outline: "none",
                   },
                   pressed: {
-                    fill: "#E42",
+                    fill: "#2f455c",
                     outline: "none",
                   },
                 }}

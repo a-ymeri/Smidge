@@ -56,10 +56,7 @@ export default function WordCloud() {
     // rotationAngles: [-90, 0],
     rotations: 1,
     rotationAngles: [0],
-    fontFamily: "verdana",
-    // disable hover
-    
-
+    fontFamily: "Inter",
     // colors: [
     //   "#333333",
     //   "#CCCCCC",
@@ -89,21 +86,20 @@ export default function WordCloud() {
 
   return (
     <>
-      <div
-        style={{
-          maxWidth: 750,
-          background: "#fff",
-          borderRadius: "15px",
-          border: "1px solid #ddd",
-          // boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
-        }}
-      >
+      <div className="rounded-component">
         <div
           style={{
-            width: 700,
+            width: "100%",
             height: 340,
           }}
         >
+          <div className="category-breakdown">Wordcloud</div>
+          <div
+            className="category-breakdownsub"
+            style={{ marginBottom: "-10px" }}
+          >
+            Exploring the semantic landscape of dominant vocabulary
+          </div>
           <ReactWordcloud words={mockData} options={options} />
         </div>
       </div>
