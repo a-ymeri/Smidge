@@ -27,8 +27,8 @@ export default function ReportPage() {
         display: "flex",
         justifyContent: "center",
         textAlign: "left",
-        paddingBottom: "35px",
-        paddingTop: "15px",
+        paddingBottom: "100px",
+        paddingTop: "100px",
         background: "#f5fafa",
       }}
     >

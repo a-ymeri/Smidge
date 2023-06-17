@@ -6,6 +6,7 @@ import WordCloud from "./components/WordCloud";
 import Map from "./components/Map";
 import CategoryCount from "./components/CategoryCount";
 import SocialMediaBarChart from "./components/Barchart";
+import DetailedDataButton from "./components/DetailedDataButton";
 
 import { Row, Col } from "react-bootstrap";
 import List from "./routes/List";
@@ -42,6 +43,11 @@ function App() {
         <Row style={{ width: "85%", margin: "auto" }}>
           <Col md={12} sm={12}>
             <List columns={["title", "description", "category", "link"]} />
+          </Col>
+        </Row>
+        <Row style={{ width: "85%", margin: "auto" }}>
+          <Col md={12} sm={12}>
+            <DetailedDataButton />
           </Col>
         </Row>
       </div>

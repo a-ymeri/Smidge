@@ -15,8 +15,6 @@ import ResourceForm from "../components/ResourceForm";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
-import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@mui/material";
 
 export interface Resource {
   id: number;
