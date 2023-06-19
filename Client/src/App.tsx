@@ -45,8 +45,8 @@ function App() {
             <List columns={["title", "description", "category", "link"]} />
           </Col>
         </Row>
-        <Row style={{ width: "85%", margin: "auto" }}>
-          <Col md={12} sm={12}>
+        <Row style={{ width: "85%", margin: "auto", marginTop: "15px" }}>
+          <Col md={6} sm={6}>
             <DetailedDataButton />
           </Col>
         </Row>

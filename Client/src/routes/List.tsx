@@ -167,82 +167,85 @@ export default function List(props: Props) {
         paddingTop: 20,
       }}
     >
-      <div style={{ textAlign: "left", marginBottom: 10 }}>
-        <Button
-          variant="contained"
-          onClick={handleAddModalOpen}
-          //color light green
-          style={{
-            backgroundColor: "#8bc34a",
-          }}
-          startIcon={<AddIcon />}
-        >
-          Add new
-        </Button>
+      {!props.columns && (
+        <div style={{ textAlign: "left", marginBottom: 10 }}>
+          <Button
+            variant="contained"
+            onClick={handleAddModalOpen}
+            //color light green
+            style={{
+              backgroundColor: "#8bc34a",
+            }}
+            startIcon={<AddIcon />}
+          >
+            Add new
+          </Button>
 
-        {/* {selectedRows.length > 0 && ( */}
-        <Button
-          variant="contained"
-          startIcon={<DeleteIcon />}
-          style={{
-            marginLeft: 10,
-          }}
-          color="error"
-          onClick={() => {
-            axios
-              .delete<Resource[]>(`/api/resource/deletemultiple`, {
-                data: selectedRows,
-              })
-              .then(() => {
-                setResources(
-                  resources.filter(
-                    (resource) => !selectedRows.includes(resource.id)
-                  )
-                );
-              })
-              .catch((err) => {
-                console.log(err);
-                alert("Error deleting resources");
-              });
-          }}
-          disabled={selectedRows.length == 0}
-        >
-          Delete
-        </Button>
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          style={{
-            marginLeft: 10,
-          }}
-          onClick={() => {
-            handleEditModalOpen();
-          }}
-          disabled={selectedRows.length !== 1}
-        >
-          Edit
-        </Button>
+          {/* {selectedRows.length > 0 && ( */}
+          <Button
+            variant="contained"
+            startIcon={<DeleteIcon />}
+            style={{
+              marginLeft: 10,
+            }}
+            color="error"
+            onClick={() => {
+              axios
+                .delete<Resource[]>(`/api/resource/deletemultiple`, {
+                  data: selectedRows,
+                })
+                .then(() => {
+                  setResources(
+                    resources.filter(
+                      (resource) => !selectedRows.includes(resource.id)
+                    )
+                  );
+                })
+                .catch((err) => {
+                  console.log(err);
+                  alert("Error deleting resources");
+                });
+            }}
+            disabled={selectedRows.length == 0}
+          >
+            Delete
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            style={{
+              marginLeft: 10,
+            }}
+            onClick={() => {
+              handleEditModalOpen();
+            }}
+            disabled={selectedRows.length !== 1}
+          >
+            Edit
+          </Button>
 
-        <ResourceForm
-          open={addModalOpen}
-          handleClose={handleClose}
-          handleSubmit={addResource}
-        />
+          <ResourceForm
+            open={addModalOpen}
+            handleClose={handleClose}
+            handleSubmit={addResource}
+          />
 
-        <ResourceForm
-          open={editModalOpen}
-          handleClose={handleClose}
-          handleSubmit={editResource}
-          editElement={selectedResource}
-        />
-      </div>
+          <ResourceForm
+            open={editModalOpen}
+            handleClose={handleClose}
+            handleSubmit={editResource}
+            editElement={selectedResource}
+          />
+        </div>
+      )}
 
-      <div style={{ height: 600, width: 1200 }}>
+      <div style={{ height: 600, minWidth: 600, maxWidth: "100%" }}>
         <DataGrid
-          sx={{
-            bgcolor: "white",
-            boxShadow: 2,
-          }}
+          // sx={{
+          //   bgcolor: "white",
+          //   boxShadow: 2,
+          // }}
+          className="rounded-component"
           rows={resources}
           columns={columns}
           autoPageSize
