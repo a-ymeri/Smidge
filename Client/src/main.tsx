@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Divider } from "@mui/material";
 import axios from "axios";
 import App from "./App.tsx";
 import "./index.css";
@@ -12,6 +11,7 @@ import ReportPage from "./routes/ReportPage.tsx";
 import Footer from "./components/Footer.tsx";
 import Navbar from "./components/Navbar.tsx";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Page = ({ children }: { children: React.ReactNode }) => (
   <>
     <Navbar />

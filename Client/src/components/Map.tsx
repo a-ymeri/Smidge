@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -11,7 +11,7 @@ import europeData from "../assets/europe.json";
 const Map = () => {
   console.log(europeData);
   useEffect(() => {
-    //give random value to each country
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     europeData.features.forEach((country: any) => {
       country.properties.value = Math.floor(Math.random() * 100);
     });

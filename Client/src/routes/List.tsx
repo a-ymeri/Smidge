@@ -1,13 +1,10 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   DataGrid,
   GridColDef,
   GridRenderCellParams,
-  GridRowHeightParams,
   GridRowId,
-  GridTreeNodeWithRender,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
@@ -91,8 +88,6 @@ export default function List({ columns }: Props) {
 
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-
-  const [widths, setWidths] = useState<number[]>([]);
 
   const [filteredColumns, setFilteredColumns] = useState<GridColDef[]>([
     ...tableColumns,

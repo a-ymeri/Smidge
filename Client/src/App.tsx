@@ -1,7 +1,4 @@
 import "./App.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import ReactWordcloud from "react-wordcloud";
 import WordCloud from "./components/WordCloud";
 import Map from "./components/Map";
 import CategoryCount from "./components/CategoryCount";

@@ -1,9 +1,9 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Chip, TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
 
 type ChippedProps = {
-  setArray: (value: any) => void;
+  setArray: React.Dispatch<React.SetStateAction<string[]>>;
   placeholder: string;
   label: string;
   initialArray?: string[];

@@ -5,7 +5,6 @@ import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import ChurchOutlinedIcon from "@mui/icons-material/ChurchOutlined";
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 
-import { Row, Col } from "react-bootstrap";
 const CategoryCount: React.FC = () => {
   return (
     // <Row>

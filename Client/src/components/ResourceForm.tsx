@@ -10,7 +10,6 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Grid,
 } from "@mui/material";
 import ChippedInput from "./ChippedInput";
 import { Resource } from "../routes/List";

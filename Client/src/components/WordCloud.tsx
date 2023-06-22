@@ -1,10 +1,10 @@
-import React from "react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 import ReactWordcloud from "react-wordcloud";
 
 export default function WordCloud() {
-  const [words, setWords] = useState<any[]>([]);
+  // const [words, setWords] = useState<any[]>([]);
 
   const word_array = [
     "extremism",
@@ -40,11 +40,9 @@ export default function WordCloud() {
     "apartheid",
   ];
 
-  const mockData = word_array.map((word, index) => {
+  const mockData = word_array.map((word) => {
     return {
       text: word,
-      //uniform distribution
-
       value: Math.floor(Math.random() * 50),
     };
   });
@@ -70,19 +68,19 @@ export default function WordCloud() {
     //   "#CC66CC",
     // ],
   };
-  useEffect(() => {
-    axios
-      .get("/api/resource/wordcloud")
-      .then((res) => {
-        const data = res.data.map((word: any) => {
-          return { text: word.word, value: word.frequency };
-        });
-        setWords(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/resource/wordcloud")
+  //     .then((res) => {
+  //       // const data = res.data.map((word: any) => {
+  //       //   return { text: word.word, value: word.frequency };
+  //       // });
+  //       // setWords(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <>
