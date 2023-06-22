@@ -319,7 +319,7 @@ export default function List({ columns }: Props) {
         </div>
       )}
 
-      <div style={{ height: 600, minWidth: 600, width: "100%" }}>
+      <div style={{ height: 600, minWidth: 600, maxWidth: 1400, width: "100%", marginBottom: 85 }}>
         <DataGrid
           // sx={{
           //   bgcolor: "white",
