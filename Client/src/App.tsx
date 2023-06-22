@@ -44,7 +44,7 @@ function App() {
               columns={[
                 {
                   field: "title",
-                  width: 130,
+                  width: 170,
                 },
                 {
                   field: "description",
