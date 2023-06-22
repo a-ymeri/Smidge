@@ -30,7 +30,7 @@ export interface Resource {
   socialMedia: string;
 }
 
-let columns: GridColDef[] = [
+const tableColumns: GridColDef[] = [
   { field: "title", headerName: "Title", width: 130 },
   {
     field: "description",
@@ -75,11 +75,16 @@ let columns: GridColDef[] = [
   { field: "socialMedia", headerName: "Social Media Type", width: 200 },
 ];
 
+type Column = {
+  field: string;
+  width: number;
+};
+
 interface Props {
-  columns?: string[];
+  columns?: Column[];
 }
 
-export default function List(props: Props) {
+export default function List({ columns }: Props) {
   const [resources, setResources] = useState<Resource[]>([]);
 
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
@@ -89,9 +94,22 @@ export default function List(props: Props) {
 
   const [widths, setWidths] = useState<number[]>([]);
 
-  if (props.columns) {
-    columns = columns.filter((column) => props.columns?.includes(column.field));
-  }
+  const [filteredColumns, setFilteredColumns] = useState<GridColDef[]>([
+    ...tableColumns,
+  ]);
+
+  useEffect(() => {
+    if (!columns) return;
+    const filteredColumns = tableColumns.filter((column) =>
+      columns.find((col) => col.field === column.field)
+    );
+
+    filteredColumns.forEach((column) => {
+      const width = columns.find((col) => col.field === column.field)?.width;
+      if (width) column.width = width;
+    });
+    setFilteredColumns(filteredColumns);
+  }, [columns]);
 
   const selectedResource = resources.find(
     (resource) => resource.id === selectedRows[0]
@@ -102,14 +120,6 @@ export default function List(props: Props) {
     const fetchData = async () => {
       const result = await axios.get<Resource[]>("/api/resource");
       setResources(result.data);
-      //get text size of each column, set width to max
-      const widths = result.data.map((resource) => {
-        const values = Object.values(resource);
-        const lengths = values.map((value) => value.toString().length);
-        const maxLength = Math.max(...lengths);
-        return maxLength * 10;
-      });
-      setWidths(widths);
     };
     fetchData();
   }, []);
@@ -167,7 +177,7 @@ export default function List(props: Props) {
         paddingTop: 20,
       }}
     >
-      {!props.columns && (
+      {!columns && (
         <div style={{ textAlign: "left", marginBottom: 10 }}>
           <Button
             variant="contained"
@@ -239,15 +249,16 @@ export default function List(props: Props) {
         </div>
       )}
 
-      <div style={{ height: 600, minWidth: 600, maxWidth: "100%" }}>
+      <div style={{ height: 600, minWidth: 600, width: "100%" }}>
         <DataGrid
           // sx={{
           //   bgcolor: "white",
           //   boxShadow: 2,
           // }}
+          key={window.location.pathname}
           className="rounded-component"
           rows={resources}
-          columns={columns}
+          columns={filteredColumns}
           autoPageSize
           checkboxSelection
           onRowSelectionModelChange={(e: GridRowId[]) => {

@@ -42,11 +42,39 @@ function App() {
         </Row>
         <Row style={{ width: "85%", margin: "auto" }}>
           <Col md={12} sm={12}>
-            <List columns={["title", "description", "category", "link"]} />
+            <List
+              key="homepage"
+              columns={[
+                {
+                  field: "title",
+                  width: 130,
+                },
+                {
+                  field: "description",
+                  width: 450,
+                },
+                {
+                  field: "category",
+                  width: 250,
+                },
+                {
+                  field: "link",
+                  width: 220,
+                },
+              ]}
+            />
           </Col>
         </Row>
-        <Row style={{ width: "85%", margin: "auto", marginTop: "15px" }}>
-          <Col md={6} sm={6}>
+        <Row
+          style={{
+            width: "85%",
+            margin: "auto",
+            marginTop: "5px",
+            justifyContent: "flex-end",
+          }}
+        >
+          {/* <Col md={9} sm={9} /> */}
+          <Col md={3} sm={3}>
             <DetailedDataButton />
           </Col>
         </Row>
