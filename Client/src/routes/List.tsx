@@ -245,6 +245,7 @@ export default function List({ columns }: Props) {
       )}
 
       <div style={{ height: 600, minWidth: 600, width: "100%" }}>
+        test
         <DataGrid
           // sx={{
           //   bgcolor: "white",
