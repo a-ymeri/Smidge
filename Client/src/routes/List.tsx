@@ -133,7 +133,7 @@ export default function List({ columns }: Props) {
           keywords: ["religious", "misinformation", "video"],
           category: "Religious",
           link: "https://example.com/video1",
-          socialMedia: "TikTok"
+          socialMedia: "TikTok",
         },
         {
           id: 2,
@@ -146,7 +146,7 @@ export default function List({ columns }: Props) {
           keywords: ["far-right", "misinformation", "video"],
           category: "Far-Right",
           link: "https://example.com/video2",
-          socialMedia: "TikTok"
+          socialMedia: "TikTok",
         },
         {
           id: 3,
@@ -159,7 +159,7 @@ export default function List({ columns }: Props) {
           keywords: ["conspiracy", "misinformation", "video"],
           category: "Conspiracy",
           link: "https://example.com/video3",
-          socialMedia: "Youtube"
+          socialMedia: "Youtube",
         },
         {
           id: 4,
@@ -172,7 +172,7 @@ export default function List({ columns }: Props) {
           keywords: ["anti-vax", "misinformation", "video"],
           category: "Anti-Vax",
           link: "https://example.com/video4",
-          socialMedia: "Facebook"
+          socialMedia: "Facebook",
         },
         {
           id: 5,
@@ -185,16 +185,15 @@ export default function List({ columns }: Props) {
           keywords: ["misinformation", "video"],
           category: "General",
           link: "https://example.com/video5",
-          socialMedia: "Instagram"
-        }
+          socialMedia: "Instagram",
+        },
       ];
-  
+
       setResources(dummyResources);
     };
-  
+
     fetchData();
   }, []);
-  
 
   const handleAddModalOpen = () => {
     setAddModalOpen(true);
@@ -240,13 +239,12 @@ export default function List({ columns }: Props) {
     // <ThemeProvider theme={theme}>
     <div
       style={{
-        position: "relative",
-        minHeight: "90vh",
         backgroundColor: "#f5fafa",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         paddingTop: 20,
+        margin: "auto",
       }}
     >
       {!columns && (
