@@ -226,6 +226,24 @@ namespace Smidge.Controller
             return Ok(wordcloud);
         }
 
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var resources = await dataContext.Resources
+                .ToListAsync();
+            var categories = resources.GroupBy(r => r.Category).ToList();
+            //map
+            Dictionary<string, int> categoryBreakdown = new Dictionary<string, int>();
+            foreach (var category in categories)
+            {
+                categoryBreakdown[category.Key] = category.Count();
+            }
+                 
+            return Ok(categoryBreakdown);
+        }
+
+
+
         private bool ResourceExists(int id)
         {
             return (dataContext.Resources?.Any(e => e.Id == id)).GetValueOrDefault();

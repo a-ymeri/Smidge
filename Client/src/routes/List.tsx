@@ -109,7 +109,6 @@ export default function List({ columns }: Props) {
   const selectedResource = resources.find(
     (resource) => resource.id === selectedRows[0]
   );
-  console.log(selectedResource);
 
   //uncomment later
   // useEffect(() => {
@@ -319,7 +318,15 @@ export default function List({ columns }: Props) {
         </div>
       )}
 
-      <div style={{ height: 600, minWidth: 600, maxWidth: 1400, width: "100%", marginBottom: 85 }}>
+      <div
+        style={{
+          height: 600,
+          minWidth: 600,
+          maxWidth: 1400,
+          width: "100%",
+          marginBottom: 85,
+        }}
+      >
         <DataGrid
           // sx={{
           //   bgcolor: "white",

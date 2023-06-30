@@ -26,12 +26,13 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="nav-links">
-        {routes.map((route) =>
+        {routes.map((route, index) =>
           route.name === "About" ? (
             <div
               className={`nav-link ${isDropdownOpen ? "active" : ""}`}
               onMouseEnter={handleDropdownToggle}
               onMouseLeave={handleDropdownToggle}
+              key={index}
             >
               {route.name}
               {isDropdownOpen && (
@@ -50,6 +51,7 @@ export default function Navbar() {
           ) : (
             <Link
               to={route.path}
+              key={index}
               className={
                 "nav-link " + (location.pathname === route.path ? "active" : "")
               }

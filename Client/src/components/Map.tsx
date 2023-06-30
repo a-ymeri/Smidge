@@ -9,13 +9,11 @@ import {
 import europeData from "../assets/europe.json";
 
 const Map = () => {
-  console.log(europeData);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     europeData.features.forEach((country: any) => {
       country.properties.value = Math.floor(Math.random() * 100);
     });
-    // console.log(europeData.features);
   }, []);
   return (
     <div

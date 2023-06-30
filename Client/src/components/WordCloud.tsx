@@ -47,8 +47,6 @@ export default function WordCloud() {
     };
   });
 
-  console.log(mockData);
-
   const options: any = {
     // rotations: 2,
     // rotationAngles: [-90, 0],
