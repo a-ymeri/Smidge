@@ -261,6 +261,27 @@ namespace Smidge.Controller
             return Ok(category_breakdown);
         }
 
+        [HttpGet("countries")]
+        public async Task<IActionResult> GetCountryBreakdown()
+        {
+            var resources = await dataContext.Resources
+                .ToListAsync();
+            var countries = resources.GroupBy(r => r.Origins).ToList();
+            //countries.Sort();
+
+
+            var countryBreakdown = countries.Select(country =>
+            new
+            {
+                Country = country.Key,
+                count = country.Count()
+            }
+            );
+
+            return Ok(countryBreakdown);
+        }
+
+
         private bool ResourceExists(int id)
         {
             return (dataContext.Resources?.Any(e => e.Id == id)).GetValueOrDefault();
