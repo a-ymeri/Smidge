@@ -9,7 +9,14 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
+import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
+import axios from "axios";
+
+type SocialMedia = {
+  socialMedia: string;
+  count: number;
+};
 
 const SocialMediaBarChart = () => {
   const data = [
@@ -19,6 +26,24 @@ const SocialMediaBarChart = () => {
     { socialMedia: "Twitter", count: 40 },
     { socialMedia: "Facebook", count: 30 },
   ];
+
+  const [socialMediaBreakdown, setSocialMediaBreakdown] = useState<
+    SocialMedia[]
+  >([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      let breakdown = (await axios.get("/api/resource/socialmedia")).data;
+
+      //Todo: remove the following:
+      breakdown = breakdown.map((el: SocialMedia) => {
+        return { ...el, count: el.count + 5 };
+      });
+
+      setSocialMediaBreakdown(breakdown);
+    };
+    getData();
+  }, []);
 
   // const colors = ["#EEf1E6", "#799FCB", "#FEC9C9", "#F9665E", "#95B4CC"];
   const colors = ["#ef476f", "#ffd166", "#06d6a0", "#118ab2", "#073b4c"];
@@ -36,7 +61,7 @@ const SocialMediaBarChart = () => {
           </div>
           <ResponsiveContainer width={"100%"} height="85%">
             <BarChart
-              data={data}
+              data={socialMediaBreakdown}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               height={300}
               width={500}
@@ -48,7 +73,7 @@ const SocialMediaBarChart = () => {
               <Tooltip />
               <Legend />
               <Bar dataKey="count">
-                {data.map((entry, index) => (
+                {socialMediaBreakdown.map((entry, index) => (
                   <Cell
                     key={entry.socialMedia}
                     fill={colors[index % colors.length]}

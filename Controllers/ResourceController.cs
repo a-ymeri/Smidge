@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Smidge.Data;
 using Smidge.DTO;
+using Smidge.Migrations;
 using Smidge.Models;
 
 namespace Smidge.Controller
@@ -238,11 +239,27 @@ namespace Smidge.Controller
             {
                 categoryBreakdown[category.Key] = category.Count();
             }
-                 
+
             return Ok(categoryBreakdown);
         }
 
+        [HttpGet("socialmedia")]
+        public async Task<IActionResult> GetSocialMedia()
+        {
+            var resources = await dataContext.Resources
+                .ToListAsync();
+            var categories = resources.GroupBy(r => r.SocialMedia).ToList();
 
+            var category_breakdown = categories.Select(category =>
+            new
+            {
+                SocialMedia = category.Key,
+                count = category.Count()
+            }
+            );
+
+            return Ok(category_breakdown);
+        }
 
         private bool ResourceExists(int id)
         {

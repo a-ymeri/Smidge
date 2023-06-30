@@ -2,7 +2,7 @@ import "./App.css";
 import WordCloud from "./components/WordCloud";
 import Map from "./components/Map";
 import CategoryCount from "./components/CategoryCount";
-import SocialMediaBarChart from "./components/Barchart";
+import SocialMediaBarChart from "./components/SocialMediaBarChart";
 import DetailedDataButton from "./components/DetailedDataButton";
 
 import { Row, Col } from "react-bootstrap";
