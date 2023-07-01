@@ -11,6 +11,7 @@ import europeData from "../assets/europe.json";
 
 const Map = () => {
   const [geoData, setGeoData] = useState(null);
+  const [max, setMax] = useState(0);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     // europeData.features.forEach((country: any) => {
@@ -26,10 +27,9 @@ const Map = () => {
       countryBreakdown = countryBreakdown.sort((el1: any, el2: any) =>
         el1.country > el2.country ? 1 : -1
       );
-      console.log(countryBreakdown);
 
       matchCountries(europeData, countryBreakdown);
-      setGeoData(europeData);
+      setGeoData(europeData as any);
     };
     getCountries();
   }, []);

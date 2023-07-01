@@ -19,13 +19,13 @@ type SocialMedia = {
 };
 
 const SocialMediaBarChart = () => {
-  const data = [
-    { socialMedia: "YouTube", count: 10 },
-    { socialMedia: "Instagram", count: 20 },
-    { socialMedia: "Tiktok", count: 30 },
-    { socialMedia: "Twitter", count: 40 },
-    { socialMedia: "Facebook", count: 30 },
-  ];
+  // const data = [
+  //   { socialMedia: "YouTube", count: 10 },
+  //   { socialMedia: "Instagram", count: 20 },
+  //   { socialMedia: "Tiktok", count: 30 },
+  //   { socialMedia: "Twitter", count: 40 },
+  //   { socialMedia: "Facebook", count: 30 },
+  // ];
 
   const [socialMediaBreakdown, setSocialMediaBreakdown] = useState<
     SocialMedia[]
@@ -40,7 +40,7 @@ const SocialMediaBarChart = () => {
         return { ...el, count: el.count + 5 };
       });
 
-      setSocialMediaBreakdown(data);
+      setSocialMediaBreakdown(breakdown);
     };
     getData();
   }, []);
