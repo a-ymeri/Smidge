@@ -7,10 +7,16 @@ import DetailedDataButton from "./components/DetailedDataButton";
 
 import { Row, Col } from "react-bootstrap";
 import List from "./routes/List";
+import Banner from "./components/Banner";
 
 function App() {
   //change axios config base url
   return (
+    <>
+    <Banner
+        title="SMIDGE"
+        description="Database with the main characteristics of the existing videos that promote extremist narratives online"
+      />
     <div
       style={{
         background: "#f5fafa",
@@ -77,6 +83,7 @@ function App() {
         </Row>
       </div>
     </div>
+    </>
   );
 }
 

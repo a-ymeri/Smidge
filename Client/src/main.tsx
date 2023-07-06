@@ -10,6 +10,8 @@ import ReportPage from "./routes/ReportPage.tsx";
 
 import Footer from "./components/Footer.tsx";
 import Navbar from "./components/Navbar.tsx";
+import AboutSmidge from "./routes/AboutSmidge.tsx";
+import AboutUs from "./routes/AboutUs.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Page = ({ children }: { children: React.ReactNode }) => (
@@ -59,6 +61,22 @@ const router = createBrowserRouter([
     element: (
       <Page>
         <ReportPage></ReportPage>
+      </Page>
+    ),
+  },
+  {
+    path: "/about-us",
+    element: (
+      <Page>
+        <AboutUs></AboutUs>
+      </Page>
+    ),
+  },
+  {
+    path: "/about-smidge",
+    element: (
+      <Page>
+        <AboutSmidge></AboutSmidge>
       </Page>
     ),
   },
