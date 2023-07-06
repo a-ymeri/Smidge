@@ -10,6 +10,8 @@ import ReportPage from "./routes/ReportPage.tsx";
 
 import Footer from "./components/Footer.tsx";
 import Navbar from "./components/Navbar.tsx";
+import AboutSmidge from "./routes/AboutSmidge.tsx";
+import AboutUs from "./routes/AboutUs.tsx";
 
 import config from "../config.json";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -62,6 +64,22 @@ const router = createBrowserRouter([
     element: (
       <Page>
         <ReportPage></ReportPage>
+      </Page>
+    ),
+  },
+  {
+    path: "/about-us",
+    element: (
+      <Page>
+        <AboutUs></AboutUs>
+      </Page>
+    ),
+  },
+  {
+    path: "/about-smidge",
+    element: (
+      <Page>
+        <AboutSmidge></AboutSmidge>
       </Page>
     ),
   },
