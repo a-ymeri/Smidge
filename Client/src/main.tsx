@@ -11,6 +11,9 @@ import ReportPage from "./routes/ReportPage.tsx";
 import Footer from "./components/Footer.tsx";
 import Navbar from "./components/Navbar.tsx";
 
+import config from "../config.json";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 // eslint-disable-next-line react-refresh/only-export-components
 const Page = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -71,6 +74,8 @@ axios.defaults.baseURL =
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <GoogleOAuthProvider clientId={config.GOOGLE_CLIENT_ID}>
+      <RouterProvider router={router}></RouterProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
