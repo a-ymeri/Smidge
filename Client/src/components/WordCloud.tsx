@@ -1,51 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import axios from "axios";
-// import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import ReactWordcloud from "react-wordcloud";
 
 export default function WordCloud() {
-  // const [words, setWords] = useState<any[]>([]);
+  const [words, setWords] = useState<any[]>([]);
 
-  const word_array = [
-    "extremism",
-    "radicalism",
-    "hate",
-    "violence",
-    "terrorism",
-    "intolerance",
-    "prejudice",
-    "discrimination",
-    "bigotry",
-    "xenophobia",
-    "homophobia",
-    "islamophobia",
-    "anti-Semitism",
-    "white supremacy",
-    "hate speech",
-    "misogyny",
-    "sexism",
-    "patriarchy",
-    "objectification",
-    "gender bias",
-    "harassment",
-    "rape culture",
-    "racism",
-    "racial profiling",
-    "systemic racism",
-    "racial injustice",
-    "white privilege",
-    "microaggressions",
-    "colorism",
-    "stereotypes",
-    "apartheid",
-  ];
+  // const word_array = [
+  //   "extremism",
+  //   "radicalism",
+  //   "hate",
+  //   "violence",
+  //   "terrorism",
+  //   "intolerance",
+  //   "prejudice",
+  //   "discrimination",
+  //   "bigotry",
+  //   "xenophobia",
+  //   "homophobia",
+  //   "islamophobia",
+  //   "anti-Semitism",
+  //   "white supremacy",
+  //   "hate speech",
+  //   "misogyny",
+  //   "sexism",
+  //   "patriarchy",
+  //   "objectification",
+  //   "gender bias",
+  //   "harassment",
+  //   "rape culture",
+  //   "racism",
+  //   "racial profiling",
+  //   "systemic racism",
+  //   "racial injustice",
+  //   "white privilege",
+  //   "microaggressions",
+  //   "colorism",
+  //   "stereotypes",
+  //   "apartheid",
+  // ];
 
-  const mockData = word_array.map((word) => {
-    return {
-      text: word,
-      value: Math.floor(Math.random() * 50),
-    };
-  });
+  // const mockData = word_array.map((word) => {
+  //   return {
+  //     text: word,
+  //     value: Math.floor(Math.random() * 50),
+  //   };
+  // });
 
   const options: any = {
     // rotations: 2,
@@ -66,19 +66,19 @@ export default function WordCloud() {
     //   "#CC66CC",
     // ],
   };
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/resource/wordcloud")
-  //     .then((res) => {
-  //       // const data = res.data.map((word: any) => {
-  //       //   return { text: word.word, value: word.frequency };
-  //       // });
-  //       // setWords(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get("/api/resource/wordcloud")
+      .then((res) => {
+        const data = res.data.map((word: any) => {
+          return { text: word.word, value: word.frequency };
+        });
+        setWords(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -96,7 +96,7 @@ export default function WordCloud() {
           >
             Exploring the semantic landscape of dominant vocabulary
           </div>
-          <ReactWordcloud words={mockData} options={options} />
+          <ReactWordcloud words={words} options={options} />
         </div>
       </div>
     </>

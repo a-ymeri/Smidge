@@ -94,16 +94,15 @@ const Map = () => {
                 geography={geo}
                 stroke="#EAEAEC"
                 style={{
-                  // hover: {
-                  //   fill: "#2f455c",
-                  //   outline: "none",
-                  // },
+                  hover: {
+                    fill: "#2f455c",
+                    outline: "none",
+                  },
                   default: {
                     // fill: "#54799f",
                     fill: `rgb(84,121,159, ${
-                      geo.properties.value / 100 + 0.3
+                      0.1 + (geo.properties.value || 0) / 10
                     })`,
-
                     outline: "none",
                   },
                   pressed: {
