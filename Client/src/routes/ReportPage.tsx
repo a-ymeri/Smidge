@@ -8,17 +8,36 @@ import {
   Button,
 } from "@mui/material";
 import { useState } from "react";
+import emailjs from "emailjs-com";
 
 export default function ReportPage() {
+ 
+  emailjs.init("8YIMmBe9XkVKdPJoP");
   const [URL, setURL] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [customCategory, setCustomCategory] = useState<string>("");
   //   const [socialMedia, setSocialMedia]
 
-  const handleSubmit = (event: React.FormEvent) => {
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    alert("works");
+  
+    const templateParams = {
+      url: URL,
+      category: category,
+      customCategory: category === "Other" ? customCategory : "",
+      description: description,
+    };
+  
+    emailjs
+      .send("service_q3u50hq", "template_yqiuyql", templateParams)
+      .then((response) => {
+        console.log("Email sent successfully!", response.status, response.text);
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+      });
   };
 
   return (
