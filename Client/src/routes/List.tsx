@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   DataGrid,
@@ -12,6 +13,8 @@ import ResourceForm from "../components/ResourceForm";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 export interface Resource {
   id: number;
@@ -92,6 +95,9 @@ export default function List({ columns }: Props) {
   const [filteredColumns, setFilteredColumns] = useState<GridColDef[]>([
     ...tableColumns,
   ]);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!columns) return;
@@ -192,6 +198,31 @@ export default function List({ columns }: Props) {
 
   //   fetchData();
   // }, []);
+
+  const handleGoogleLogin = (resp: any) => {
+    const credential = resp.credential;
+    // send token to backend in Authorization header
+    console.log(credential);
+    axios
+      .get("/api/auth/google", {
+        headers: { Authorization: `Bearer ${credential}` },
+      })
+      .then((resp) => {
+        // store in cookies that the user is logged in
+        const token = resp.data;
+        const decoded: any = jwtDecode(token);
+        document.cookie = `token=${token}; expires=${new Date(
+          decoded.exp * 1000
+        ).toUTCString()} path=/`;
+        // alert('success');
+        // navigate('/admin');
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert("You are not authorized to access this page");
+        navigate("/");
+      });
+  };
 
   const handleAddModalOpen = () => {
     setAddModalOpen(true);
@@ -343,7 +374,16 @@ export default function List({ columns }: Props) {
           }}
           getRowHeight={() => "auto"}
         />
+        <div style={{ width: "120px" }}>
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => {
+              alert("err");
+            }}
+          />
+        </div>
       </div>
+      <div style={{ marginLeft: 1000 }}></div>
     </div>
     // </ThemeProvider>
   );

@@ -15,31 +15,6 @@ export default function Navbar() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleGoogleLogin = (resp: any) => {
-    const credential = resp.credential;
-    // send token to backend in Authorization header
-    console.log(credential);
-    axios
-      .get("/api/auth/google", {
-        headers: { Authorization: `Bearer ${credential}` },
-      })
-      .then((resp) => {
-        // store in cookies that the user is logged in
-        const token = resp.data;
-        const decoded: any = jwtDecode(token);
-        document.cookie = `token=${token}; expires=${new Date(
-          decoded.exp * 1000
-        ).toUTCString()} path=/`;
-        // alert('success');
-        // navigate('/admin');
-        window.location.reload();
-      })
-      .catch((err) => {
-        alert("You are not authorized to access this page");
-        navigate("/");
-      });
-  };
-
   const routes = [
     { path: "/", name: "Dashboard" },
     { path: "/list", name: "List" },
@@ -92,14 +67,6 @@ export default function Navbar() {
       </div>
 
       <div className="filler"></div>
-      <div className="login">
-        <GoogleLogin
-          onSuccess={handleGoogleLogin}
-          onError={() => {
-            alert("err");
-          }}
-        />
-      </div>
     </nav>
   );
 }
