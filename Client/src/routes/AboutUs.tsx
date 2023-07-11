@@ -7,11 +7,14 @@ export default function AboutUs() {
       <Banner title="ABOUT THIS PLATFORM" description="" />
       <div className="about-smidge">
         <div className="about-smidge-intro">
-          Within the framework of Working Package 3 of the SMIDGE project, which
-          focuses on horizon scanning and mapping of current discourses, one of
-          the tasks led by the KCSS involves the development of a database
-          containing the main characteristics of existing videos that promote
-          extremist narratives online.{" "}
+          <span>
+            Within the framework of Working Package 3 of the{" "}
+            <strong>SMIDGE</strong> project, which focuses on horizon scanning
+            and mapping of current discourses, one of the tasks led by the KCSS
+            involves the development of a database containing the main
+            characteristics of existing videos that promote extremist narratives
+            online.{" "}
+          </span>
         </div>
 
         <div className="about-regular-text">
@@ -47,12 +50,12 @@ export default function AboutUs() {
           promote QAnon; videos that distort basic facts to reject vaccination
           or encourage other to reject vaccines;
         </div>
-        <div>
+        <div className="about-regular-text">
           Militant and violent narratives, will include videos that promote,
           incite or glorify violence against individuals or groups based on
           their ethnic identity/race, religion, or political beliefs;{" "}
         </div>
-        <div>
+        <div className="about-regular-text">
           Religious extremist narratives, will include videos that propagate,
           incite, embrace, glorify or justify violence on the grounds of
           religion or for promoting religious doctrine; videos that promote

@@ -374,14 +374,16 @@ export default function List({ columns }: Props) {
           }}
           getRowHeight={() => "auto"}
         />
-        <div style={{ width: "120px" }}>
-          <GoogleLogin
-            onSuccess={handleGoogleLogin}
-            onError={() => {
-              alert("err");
-            }}
-          />
-        </div>
+        {filteredColumns.length > 5 && (
+          <div style={{ width: "120px" }}>
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => {
+                alert("err");
+              }}
+            />
+          </div>
+        )}
       </div>
       <div style={{ marginLeft: 1000 }}></div>
     </div>

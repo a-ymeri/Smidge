@@ -380,16 +380,15 @@ html {
   line-height: 1.6;
   text-align: justify;
   padding: 20px;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .about-smidge-intro {
   /* display: flex; */
   flex-direction: column;
-  width: 80%;
+  width: 70%;
   font-size: 22px;
-  padding: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
   color: #2f455c;
   /* font-family: "Lulo"; */
 }
@@ -403,27 +402,33 @@ html {
 .about-regular-text {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 75%;
   padding: 0px 20px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  margin-top: 5px;
   /* padding-bottom: ; */
 }
 
 .about-list {
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  margin-top: 15px;
 }
 
 .about-list-item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   margin-bottom: 10px;
   box-sizing: border-box;
   padding: 0 20px;
+}
+
+.aboutIcon {
+  width: 100px;
+  padding: 10px;
 }

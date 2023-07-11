@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -71,6 +72,8 @@ namespace Smidge.Controller
         // PUT: api/Resources/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwresource/?resourceid=2123754
         [HttpPut("{id}")]
+        [Authorize]
+
         public async Task<IActionResult> PutResource(int id, ResponseResourceDTO requestResourceDTO)
         {
 
@@ -131,6 +134,8 @@ namespace Smidge.Controller
 
         // To protect from overposting attacks, see https://go.microsoft.com/fwresource/?resourceid=2123754
         [HttpPost]
+        [Authorize]
+
         public async Task<ActionResult<ResponseResourceDTO>> PostResource(RequestResourceDTO body)
         {
             var resource = new Resource(title: body.Title,
@@ -181,6 +186,8 @@ namespace Smidge.Controller
 
         // DELETE: api/Resources/5
         [HttpDelete("{id}")]
+        [Authorize]
+
         public async Task<IActionResult> DeleteResource(int id)
         {
             if (dataContext.Resources == null)
@@ -201,6 +208,8 @@ namespace Smidge.Controller
 
         // DELETE: api/Resources/DeleteMultiple
         [HttpDelete("DeleteMultiple")]
+        [Authorize]
+
         public async Task<IActionResult> DeleteMultipleResources([FromBody] List<int> ids)
         {
             var resources = dataContext.Resources.Where(r => ids.Contains(r.Id)).ToList();
