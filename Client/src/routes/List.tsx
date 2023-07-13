@@ -16,6 +16,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 
+import { useCookies } from "react-cookie";
+
 export interface Resource {
   id: number;
   title: string;
@@ -97,6 +99,10 @@ export default function List({ columns }: Props) {
   ]);
 
   const location = useLocation();
+
+  //get auth token from cookies
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const showAdmin = !columns && cookies.token;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -204,7 +210,7 @@ export default function List({ columns }: Props) {
     // send token to backend in Authorization header
     console.log(credential);
     axios
-      .get("/api/auth/google", {
+      .get("/api/auth/login", {
         headers: { Authorization: `Bearer ${credential}` },
       })
       .then((resp) => {
@@ -220,7 +226,8 @@ export default function List({ columns }: Props) {
       })
       .catch((err) => {
         alert("You are not authorized to access this page");
-        navigate("/");
+        // navigate("/");
+        // window.location.reload();
       });
   };
 
@@ -276,7 +283,7 @@ export default function List({ columns }: Props) {
         margin: "auto",
       }}
     >
-      {!columns && (
+      {showAdmin && (
         <div style={{ textAlign: "left", marginBottom: 10 }}>
           <Button
             variant="contained"
