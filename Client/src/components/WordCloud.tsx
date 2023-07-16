@@ -86,7 +86,6 @@ export default function WordCloud() {
         <div
           style={{
             width: "100%",
-            height: 340,
           }}
         >
           <div className="category-breakdown">Wordcloud</div>

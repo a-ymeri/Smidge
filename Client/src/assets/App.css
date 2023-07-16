@@ -142,7 +142,7 @@ html {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 40%;
+  /* width: 40%; */
   padding: 0 1rem;
   max-width: 960px;
 }
@@ -173,7 +173,6 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 40%;
   max-width: 960px;
 }
 
@@ -256,7 +255,7 @@ html {
 
 .square-components {
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -297,6 +296,8 @@ html {
   margin-bottom: 3px;
   margin-top: 3px;
   padding: 5px;
+  margin-left: -70px;
+  margin-bottom: 25px;
 }
 
 .icon {
@@ -353,7 +354,10 @@ html {
 }
 
 .banner-left {
-  margin-left: 15em; /* Adjust the spacing between the text and the left edge */
+  /* margin-left: 15em; */
+  margin-left: 10%;
+
+  /* Adjust the spacing between the text and the left edge */
 }
 
 .banner-title {
@@ -431,4 +435,68 @@ html {
 .aboutIcon {
   width: 100px;
   padding: 10px;
+}
+
+.dashboard-row {
+  width: 90%;
+  margin: auto;
+}
+
+.reportForm {
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .square-components {
+    /* max-width: 500px; */
+    justify-content: center;
+  }
+
+  .category-card {
+    /* width: 100%;
+    display: flex;
+    justify-content: center; */
+  }
+
+  .footer-right {
+    margin-top: 30px;
+  }
+
+  .footer-left {
+    display: flex;
+    justify-content: center;
+  }
+
+  .eu-flag {
+    margin-bottom: 20px;
+  }
+
+  .rounded-component {
+    padding: 14px;
+  }
+
+  .dashboard {
+    padding: 0px;
+  }
+
+  .dashboard-row {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .count-and-map {
+    margin-bottom: 20px;
+  }
+
+  .about-smidge-intro {
+    width: 100%;
+  }
+
+  .about-regular-text {
+    width: 100%;
+  }
+
+  .reportForm {
+    width: 80%;
+  }
 }

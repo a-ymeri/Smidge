@@ -1,0 +1,20 @@
+.nav-desktop {
+  display: none;
+}
+
+.nav-mobile {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 4px;
+  background-color: #b3eeff;
+}
+
+@media screen and (min-width: 768px) {
+  .nav-mobile {
+    display: none;
+  }
+  .nav-desktop {
+    display: flex;
+  }
+}

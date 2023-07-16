@@ -281,6 +281,7 @@ export default function List({ columns }: Props) {
         alignItems: "center",
         paddingTop: 20,
         margin: "auto",
+        paddingBottom: 20,
       }}
     >
       {showAdmin && (
@@ -358,10 +359,9 @@ export default function List({ columns }: Props) {
       <div
         style={{
           height: 600,
-          minWidth: 600,
+          // minWidth: 600,
           maxWidth: 1400,
           width: "100%",
-          marginBottom: 85,
         }}
       >
         <DataGrid
@@ -381,18 +381,17 @@ export default function List({ columns }: Props) {
           }}
           getRowHeight={() => "auto"}
         />
-        {filteredColumns.length > 5 && (
-          <div style={{ width: "120px" }}>
-            <GoogleLogin
-              onSuccess={handleGoogleLogin}
-              onError={() => {
-                alert("err");
-              }}
-            />
-          </div>
-        )}
       </div>
-      <div style={{ marginLeft: 1000 }}></div>
+      {filteredColumns.length > 5 && (
+        <div style={{ width: "120px", marginTop: "15px" }}>
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => {
+              alert("err");
+            }}
+          />
+        </div>
+      )}
     </div>
     // </ThemeProvider>
   );

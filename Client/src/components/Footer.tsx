@@ -4,20 +4,31 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { IconButton } from "@mui/material";
 import euFlag from "../assets/euFlag.png";
 
+import { Container, Row, Col } from "react-bootstrap";
 export default function Footer() {
   // const elements = ["Dashboard", "List"];
   return (
-    <>
-      <div className="footer">
-        <div className="footer-left">
-          <div className="footer-funded-by">
-            <img src={euFlag} alt="EU Flag" />
-            <p>
-              This project has received funding from the European Union’s
-              Horizon Research and Innovation Programme under grant agreement No
-              101095290.
-            </p>
-          </div>
+    <Container fluid>
+      <Row className="footer">
+        <Col lg={4} md={6} sm={12} className="footer-left">
+          <Row className="footer-funded-by">
+            <Col
+              className="eu-flag"
+              style={{ display: "flex", justifyContent: "center" }}
+              lg={4}
+              md={12}
+              sm={12}
+            >
+              <img src={euFlag} alt="EU Flag" />
+            </Col>
+            <Col lg={8} md={12} sm={12}>
+              <p>
+                This project has received funding from the European Union’s
+                Horizon Research and Innovation Programme under grant agreement
+                No 101095290.
+              </p>
+            </Col>
+          </Row>
 
           <div className="footer-contents">
             The contents of this website are the sole responsibility of the
@@ -26,12 +37,17 @@ export default function Footer() {
             Agency are not responsible for any use that may be made of the
             information this website contains.
           </div>
-        </div>
-        <div className="footer-right">
+        </Col>
+        <Col lg={4} md={6} sm={12} className="footer-right">
           <div className="footer-connect">Connect with us</div>
           <span>
-            <a href="mailto:info@smidgeproject.eu" className="mail-link">
-              {" "}
+            <a
+              href="mailto:info@smidgeproject.eu"
+              className="mail-link"
+              style={{
+                wordBreak: "break-word",
+              }}
+            >
               info@smidgeproject.eu
             </a>
           </span>
@@ -55,11 +71,11 @@ export default function Footer() {
               <YouTubeIcon />
             </IconButton>
           </div>
-        </div>
-      </div>
-      <div className="footer3">
+        </Col>
+      </Row>
+      <Row className="footer3">
         <div className="footer-copyright">© 2023 Smidge Project</div>
-      </div>
-    </>
+      </Row>
+    </Container>
   );
 }

@@ -54,42 +54,38 @@ const SocialMediaBarChart = () => {
 
   console.log(socialMediaBreakdown);
   return (
-    <Row>
-      <Col md={12}>
-        <div
-          className="rounded-component"
-          style={{ height: "100%", maxHeight: "500px" }}
+    <div
+      className="rounded-component"
+      style={{ height: "100%", maxHeight: "400px", maxWidth: "100%" }}
+    >
+      <div className="category-breakdown">Social Media Source</div>
+      <div className="category-breakdownsub">
+        Illustrating the distribution of records by platform
+      </div>
+      <ResponsiveContainer width="100%" height="70%">
+        <BarChart
+          data={socialMediaBreakdown}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          // height={300}
+          // width={500}
+          //disable legend
         >
-          <div className="category-breakdown">Social Media Source</div>
-          <div className="category-breakdownsub">
-            Illustrating the distribution of records by platform
-          </div>
-          <ResponsiveContainer width={"100%"} height="85%">
-            <BarChart
-              data={socialMediaBreakdown}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              height={300}
-              width={500}
-              //disable legend
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="socialMedia" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count">
-                {socialMediaBreakdown.map((entry, index) => (
-                  <Cell
-                    key={entry.socialMedia}
-                    fill={colors[index % colors.length]}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </Col>
-    </Row>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="socialMedia" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="count">
+            {socialMediaBreakdown.map((entry, index) => (
+              <Cell
+                key={entry.socialMedia}
+                fill={colors[index % colors.length]}
+              />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -18,11 +18,12 @@ function App() {
         description="Database with the main characteristics of the existing videos that promote extremist narratives online"
       />
       <div
+        className="dashboard"
         style={{
           background: "#f5fafa",
-          padding: 25,
           display: "flex",
           flexDirection: "column",
+          paddingTop: "20px",
         }}
       >
         <div
@@ -31,8 +32,8 @@ function App() {
             flexDirection: "column",
           }}
         >
-          <Row style={{ width: "85%", margin: "auto" }}>
-            <Col md={6} sm={12}>
+          <Row className="dashboard-row">
+            <Col md={6} sm={12} className="count-and-map">
               <CategoryCount />
               <br></br>
               <Map />
@@ -43,7 +44,7 @@ function App() {
               <SocialMediaBarChart />
             </Col>
           </Row>
-          <Row style={{ width: "85%", margin: "auto" }}>
+          <Row className="dashboard-row">
             <Col md={12} sm={12}>
               <List
                 key="homepage"
@@ -72,11 +73,12 @@ function App() {
             style={{
               width: "85%",
               margin: "auto",
-              marginTop: "-65px",
+              // marginTop: "-65px",
               justifyContent: "flex-end",
+              marginBottom: "20px",
+              marginTop: "20px",
             }}
           >
-            {/* <Col md={9} sm={9} /> */}
             <Col md={3} sm={3}>
               <DetailedDataButton />
             </Col>

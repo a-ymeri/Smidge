@@ -1,9 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import smidgeLogo from "../assets/smidge-logo.png";
-import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import jwtDecode from "jwt-decode";
 
 export default function Navbar() {
   const location = useLocation();
@@ -22,8 +19,9 @@ export default function Navbar() {
     { path: "/report", name: "Report" },
   ];
   // const elements = ["Dashboard", "List"];
+
   return (
-    <nav className="nav-wrapper">
+    <nav className="nav-wrapper nav-desktop">
       <div className="smidge-logo">
         <Link to="/" className="brand-logo">
           <img src={smidgeLogo} alt="Smidge Logo" />

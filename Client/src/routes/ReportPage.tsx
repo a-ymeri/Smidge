@@ -80,7 +80,7 @@ export default function ReportPage() {
         background: "#f5fafa",
       }}
     >
-      <form style={{ width: "50%" }} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="reportForm">
         <h2>Report a video</h2>
         <p>
           If you feel that you have come across a video that spreads radicalism
