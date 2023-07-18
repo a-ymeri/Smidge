@@ -50,7 +50,7 @@ export default function ReportPage() {
     };
 
     emailjs
-      .send("service_q3u50hqXX", "template_yqiuyql", templateParams)
+      .send("service_q3u50hq", "template_yqiuyql", templateParams)
       .then((response) => {
         console.log("Email sent successfully!", response.status, response.text);
         setIsSending(false);

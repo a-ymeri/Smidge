@@ -56,7 +56,12 @@ namespace Smidge
                         {
 
                             var email = context.Principal.FindFirstValue(ClaimTypes.Email);
-                            if (email != "arditymeri7@gmail.com")
+                            var allowedEmails = new string[]
+                            {
+                                "arditymeri7@gmail.com",
+                                "vijon.b@gmail.com"
+                            };
+                            if (!allowedEmails.Contains(email))
                             {
                                 context.Fail("Unauthorized");
                             }
@@ -67,7 +72,10 @@ namespace Smidge
 
 
             builder.Services.AddControllers();
-            string connectionString = "Host=localhost;Port=5432;Database=smidge;Username=postgres;Password=postgres";
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            //Console.WriteLine(connectionStringg);
+            //string connectionString = "Host=localhost;Port=5432;Database=smidge;Username=postgres;Password=postgres";
             builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseNpgsql(connectionString);

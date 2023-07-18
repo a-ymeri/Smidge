@@ -382,7 +382,7 @@ export default function List({ columns }: Props) {
           getRowHeight={() => "auto"}
         />
       </div>
-      {filteredColumns.length > 5 && (
+      {!showAdmin && filteredColumns.length > 5 && (
         <div style={{ width: "120px", marginTop: "15px" }}>
           <GoogleLogin
             onSuccess={handleGoogleLogin}

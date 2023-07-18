@@ -22,7 +22,8 @@ namespace Smidge.Controllers
             var email = jwtToken.Claims.First(claim => claim.Type == "email").Value;
 
             var allowedEmails = new string[] {
-                "arditymeri7@gmail.com"
+                "arditymeri7@gmail.com",
+                "vijon.b@gmail.com"
             };
 
             if (!allowedEmails.Contains(email))
