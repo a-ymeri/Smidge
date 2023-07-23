@@ -80,6 +80,8 @@ const Map = () => {
         width={800}
         height={800}
         projection="geoAzimuthalEqualArea"
+        //on hover, show the country name and the number of records
+
         projectionConfig={{
           rotate: [-10.0, -53.0, 0],
           scale: 1200,
@@ -93,6 +95,7 @@ const Map = () => {
                 key={geo.rsmKey}
                 geography={geo}
                 stroke="#EAEAEC"
+                //on hover, show the country name and the number of records
                 style={{
                   hover: {
                     fill: "#2f455c",

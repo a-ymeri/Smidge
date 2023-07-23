@@ -19,7 +19,7 @@ namespace Smidge
             //allow all origins
             var allowedOrigins = new string[] { "*" };
 
-            builder.WebHost.UseUrls("http://localhost:7000");
+            builder.WebHost.UseUrls("http://0.0.0.0:7000");
 
 
 
