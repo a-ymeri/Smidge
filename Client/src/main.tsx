@@ -89,10 +89,10 @@ const router = createBrowserRouter([
 
 const cookies = new Cookies();
 const token = cookies.get("token");
-axios.defaults.baseURL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:7000"
-    : "https://smidge.herokuapp.com";
+axios.defaults.baseURL = " http://localhost:7000";
+// process.env.NODE_ENV === "http://localhost:7000"
+//   ? "http://localhost:7000"
+//   : "https://smidge.herokuapp.com";
 
 //set axios auth header from cookie
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
