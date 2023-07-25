@@ -98,3 +98,5 @@ Client/node_modules
 *.wxs
 *.xss
 *.sh
+dist/
+Client/dist/
