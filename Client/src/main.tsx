@@ -90,9 +90,9 @@ const router = createBrowserRouter([
 const cookies = new Cookies();
 const token = cookies.get("token");
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "http://localhost:7000"
-    ? "http://localhost:7000"
-    : "http://62.171.148.66:7000/";
+  process.env.NODE_ENV === "development"
+    ? "https://localhost:7000"
+    : "https://62.171.148.66:7000/";
 
 //set axios auth header from cookie
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

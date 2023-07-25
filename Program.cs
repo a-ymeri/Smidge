@@ -18,14 +18,14 @@ namespace Smidge
 
             //allow all origins
             var allowedOrigins = new string[] { "*" };
-
-            builder.WebHost.UseUrls("http://0.0.0.0:7000");
-
-
+            String[] urls = {"https://0.0.0.0:7000"};
+            builder.WebHost.UseUrls(urls);
 
 
-            // Add services to the container.
-            builder.Services.AddAuthentication(x =>
+
+
+                // Add services to the container.
+                builder.Services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
