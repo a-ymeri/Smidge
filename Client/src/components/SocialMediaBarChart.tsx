@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 type SocialMedia = {

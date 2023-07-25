@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   DataGrid,
@@ -98,12 +97,9 @@ export default function List({ columns }: Props) {
     ...tableColumns,
   ]);
 
-  const location = useLocation();
-
   //get auth token from cookies
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, ,] = useCookies(["token"]);
   const showAdmin = !columns && cookies.token;
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!columns) return;
@@ -224,7 +220,7 @@ export default function List({ columns }: Props) {
         // navigate('/admin');
         window.location.reload();
       })
-      .catch((err) => {
+      .catch(() => {
         alert("You are not authorized to access this page");
         // navigate("/");
         // window.location.reload();

@@ -1,10 +1,9 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import smidgeLogo from "../assets/smidge-logo.png";
 
 export default function Navbar() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

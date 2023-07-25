@@ -1,4 +1,3 @@
-import React from "react";
 import Banner from "../components/Banner";
 import { Row, Col } from "react-bootstrap";
 import icon1 from "../assets/about-us-icon-1.svg";

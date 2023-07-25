@@ -11,7 +11,7 @@ import europeData from "../assets/europe.json";
 
 const Map = () => {
   const [geoData, setGeoData] = useState(null);
-  const [max, setMax] = useState(0);
+  // const [max, setMax] = useState(0);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     // europeData.features.forEach((country: any) => {
