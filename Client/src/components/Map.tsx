@@ -5,13 +5,14 @@ import {
   Geographies,
   Geography,
   Graticule,
+  Marker,
 } from "react-simple-maps";
-
+import Tooltip from "@mui/material/Tooltip";
 import europeData from "../assets/europe.json";
 
 const Map = () => {
   const [geoData, setGeoData] = useState(null);
-  // const [max, setMax] = useState(0);
+  const [tooltipContent, setTooltipContent] = useState("");
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     // europeData.features.forEach((country: any) => {
@@ -33,6 +34,10 @@ const Map = () => {
     };
     getCountries();
   }, []);
+
+  useEffect(() => {
+    console.log(tooltipContent);
+  }, [tooltipContent]);
 
   function matchCountries(geoJson: any, data: any[]) {
     /*
@@ -77,6 +82,14 @@ const Map = () => {
         Visualizing the geographic distribution of data records
       </div>
       <ComposableMap
+        data-tip=""
+        onClick={(e: any) => {
+          // The map container has a width and the SVGs for countries do not.
+          // E.g., checks if the user is clicking on the map itself.
+          if (e.target.width) {
+            setTooltipContent("");
+          }
+        }}
         width={800}
         height={800}
         projection="geoAzimuthalEqualArea"
@@ -91,29 +104,36 @@ const Map = () => {
         <Geographies geography={geoData}>
           {({ geographies }) =>
             geographies.map((geo) => (
-              <Geography
+              <Tooltip
+                title={`${geo.properties.name} - ${geo.properties.value || 0}`}
                 key={geo.rsmKey}
-                geography={geo}
-                stroke="#EAEAEC"
-                //on hover, show the country name and the number of records
-                style={{
-                  hover: {
-                    fill: "#2f455c",
-                    outline: "none",
-                  },
-                  default: {
-                    // fill: "#54799f",
-                    fill: `rgb(84,121,159, ${
-                      0.1 + (geo.properties.value || 0) / 10
-                    })`,
-                    outline: "none",
-                  },
-                  pressed: {
-                    fill: "#2f455c",
-                    outline: "none",
-                  },
-                }}
-              />
+                //place center
+                placement="top"
+              >
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  stroke="#EAEAEC"
+                  //on hover, show the country name and the number of records
+                  style={{
+                    hover: {
+                      fill: "#2f455c",
+                      outline: "none",
+                    },
+                    default: {
+                      // fill: "#54799f",
+                      fill: `rgb(84,121,159, ${
+                        0.1 + (geo.properties.value || 0) / 10
+                      })`,
+                      outline: "none",
+                    },
+                    pressed: {
+                      fill: "#2f455c",
+                      outline: "none",
+                    },
+                  }}
+                />
+              </Tooltip>
             ))
           }
         </Geographies>

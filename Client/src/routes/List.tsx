@@ -92,6 +92,7 @@ export default function List({ columns }: Props) {
 
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const [filteredColumns, setFilteredColumns] = useState<GridColDef[]>([
     ...tableColumns,
@@ -125,81 +126,6 @@ export default function List({ columns }: Props) {
     };
     fetchData();
   }, []);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // const dummyResources = [
-  //     //   {
-  //     //     id: 1,
-  //     //     title: "Religious Misinformation Video",
-  //     //     description: "This video spreads religious misinformation.",
-  //     //     year: 2022,
-  //     //     language: "English",
-  //     //     origins: "Albania",
-  //     //     targetAudience: "Middle aged adults",
-  //     //     keywords: ["religious", "misinformation", "video"],
-  //     //     category: "Religious",
-  //     //     link: "https://example.com/video1",
-  //     //     socialMedia: "TikTok",
-  //     //   },
-  //     //   {
-  //     //     id: 2,
-  //     //     title: "Far-Right Misinformation Video",
-  //     //     description: "This video spreads far-right misinformation.",
-  //     //     year: 2021,
-  //     //     language: "English",
-  //     //     origins: "Italy",
-  //     //     targetAudience: "Middle aged adults",
-  //     //     keywords: ["far-right", "misinformation", "video"],
-  //     //     category: "Far-Right",
-  //     //     link: "https://example.com/video2",
-  //     //     socialMedia: "TikTok",
-  //     //   },
-  //     //   {
-  //     //     id: 3,
-  //     //     title: "Conspiracy Misinformation Video",
-  //     //     description: "This video spreads conspiracy misinformation.",
-  //     //     year: 2020,
-  //     //     language: "English",
-  //     //     origins: "Germany",
-  //     //     targetAudience: "Middle aged adults",
-  //     //     keywords: ["conspiracy", "misinformation", "video"],
-  //     //     category: "Conspiracy",
-  //     //     link: "https://example.com/video3",
-  //     //     socialMedia: "Youtube",
-  //     //   },
-  //     //   {
-  //     //     id: 4,
-  //     //     title: "Anti-Vax Misinformation Video",
-  //     //     description: "This video spreads anti-vaccine misinformation.",
-  //     //     year: 2019,
-  //     //     language: "English",
-  //     //     origins: "France",
-  //     //     targetAudience: "Middle aged adults",
-  //     //     keywords: ["anti-vax", "misinformation", "video"],
-  //     //     category: "Anti-Vax",
-  //     //     link: "https://example.com/video4",
-  //     //     socialMedia: "Facebook",
-  //     //   },
-  //     //   {
-  //     //     id: 5,
-  //     //     title: "Misinformation Video",
-  //     //     description: "This video contains general misinformation.",
-  //     //     year: 2018,
-  //     //     language: "English",
-  //     //     origins: "Greece",
-  //     //     targetAudience: "Middle aged adults",
-  //     //     keywords: ["misinformation", "video"],
-  //     //     category: "General",
-  //     //     link: "https://example.com/video5",
-  //     //     socialMedia: "Instagram",
-  //     //   },
-  //     // ];
-
-  //     setResources(dummyResources);
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const handleGoogleLogin = (resp: any) => {
     const credential = resp.credential;
