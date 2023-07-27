@@ -23,7 +23,8 @@ namespace Smidge.Controllers
 
             var allowedEmails = new string[] {
                 "arditymeri7@gmail.com",
-                "vijon.b@gmail.com"
+                "vijon.b@gmail.com",
+                "wbsbkcss@gmail.com"
             };
 
             if (!allowedEmails.Contains(email))
