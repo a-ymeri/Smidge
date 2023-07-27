@@ -66,6 +66,58 @@ type Props = {
 
 function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   //set title to props.title if it exists, otherwise set it to ""
+
+  const countryList = [
+    "Albania",
+    "Andorra",
+    "Austria",
+    "Belarus",
+    "Belgium",
+    "Bosnia and Herzegovina",
+    "Bulgaria",
+    "Croatia",
+    "Cyprus",
+    "Czech Republic",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Georgia (country)",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Republic of Ireland",
+    "Italy",
+    "Kosovo",
+    "Latvia",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Malta",
+    "Moldova",
+    "Monaco",
+    "Montenegro",
+    "Netherlands",
+    "Republic of Macedonia",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Romania",
+    "Russia",
+    "San Marino",
+    "Serbia",
+    "Slovakia",
+    "Slovenia",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "Turkey",
+    "Ukraine",
+    "United Kingdom",
+    "Vatican City",
+  ];
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [otherCategory, setOtherCategory] = useState(""); //only used if category is "Other"
@@ -247,14 +299,20 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
               ))}
             </Select>
           </FormControl>
-          <TextField
-            label="Origins (geographic)"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={origins}
-            onChange={(e) => setOrigins(e.target.value)}
-          />
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel id="country-label">Origins (geographic)</InputLabel>
+            <Select
+              labelId="country-label"
+              id="country"
+              value={origins}
+              label="country"
+              onChange={(e) => setOrigins(e.target.value)}
+            >
+              {countryList.map((country) => (
+                <MenuItem value={country}>{country}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             label="Target audience"
             fullWidth
