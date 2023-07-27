@@ -15,6 +15,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
+
 import { useCookies } from "react-cookie";
 
 export interface Resource {
@@ -161,6 +168,24 @@ export default function List({ columns }: Props) {
     setEditModalOpen(true);
   };
 
+  const handleDelete = () => {
+    axios
+      .delete<Resource[]>(`/api/resource/deletemultiple`, {
+        data: selectedRows,
+      })
+      .then(() => {
+        setResources(
+          resources.filter((resource) => !selectedRows.includes(resource.id))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error deleting resources");
+      });
+    setSelectedRows([]);
+    setDeleteModalOpen(false);
+  };
+
   const editResource = async (data: Resource) => {
     const result = await axios.put<Resource>(
       `/api/resource/${selectedRows[0]}`,
@@ -229,21 +254,7 @@ export default function List({ columns }: Props) {
             }}
             color="error"
             onClick={() => {
-              axios
-                .delete<Resource[]>(`/api/resource/deletemultiple`, {
-                  data: selectedRows,
-                })
-                .then(() => {
-                  setResources(
-                    resources.filter(
-                      (resource) => !selectedRows.includes(resource.id)
-                    )
-                  );
-                })
-                .catch((err) => {
-                  console.log(err);
-                  alert("Error deleting resources");
-                });
+              setDeleteModalOpen(true);
             }}
             disabled={selectedRows.length == 0}
           >
@@ -275,6 +286,30 @@ export default function List({ columns }: Props) {
             handleSubmit={editResource}
             editElement={selectedResource}
           />
+
+          <Dialog
+            open={deleteModalOpen}
+            onClose={() => setDeleteModalOpen(false)}
+          >
+            <DialogTitle>Deletion confirmation</DialogTitle>
+
+            <DialogContent>
+              Are you sure you want to delete the selected resource(s)? This
+              action cannot be undone.
+            </DialogContent>
+            <DialogActions>
+              <Button
+                // variant="contained"
+                onClick={() => setDeleteModalOpen(false)}
+                style={{ marginLeft: 10 }}
+              >
+                Cancel
+              </Button>
+              <Button variant="contained" color="error" onClick={handleDelete}>
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       )}
 

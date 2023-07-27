@@ -5,7 +5,6 @@ import {
   Geographies,
   Geography,
   Graticule,
-  Marker,
 } from "react-simple-maps";
 import Tooltip from "@mui/material/Tooltip";
 import europeData from "../assets/europe.json";
