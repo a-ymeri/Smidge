@@ -223,8 +223,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       <DialogTitle id="alert-dialog-title">
         {props.editElement ? "Edit resource" : "Add a new resource"}
       </DialogTitle>
-      <Button onClick={testPopulate}>Populate</Button>
-      test
+      {/* <Button onClick={testPopulate}>Populate</Button> */}
       <DialogContent>
         <form>
           <TextField
