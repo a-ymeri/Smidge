@@ -29,6 +29,7 @@ export interface Resource {
   title: string;
   description: string;
   year: number;
+  dateRecorded: string;
   language: string;
   origins: string;
   targetAudience: string;
@@ -50,6 +51,7 @@ const tableColumns: GridColDef[] = [
     ),
   },
   { field: "year", headerName: "Year", width: 130 },
+  { field: "dateRecorded", headerName: "Date Recorded", width: 150 },
   { field: "language", headerName: "Language", width: 130 },
   { field: "origins", headerName: "Origins", width: 130 },
   {

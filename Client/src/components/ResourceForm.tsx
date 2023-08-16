@@ -123,6 +123,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   const [otherCategory, setOtherCategory] = useState(""); //only used if category is "Other"
   const [description, setDescription] = useState("");
   const [year, setYear] = useState(2023);
+  const [dateRecorded, setDateRecorded] = useState("");
   const [language, setLanguage] = useState("");
   const [origins, setOrigins] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
@@ -136,6 +137,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       setCategory(props.editElement.category);
       setDescription(props.editElement.description);
       setYear(props.editElement.year);
+      setDateRecorded(props.editElement.dateRecorded);
       setLanguage(props.editElement.language);
       setOrigins(props.editElement.origins);
       setTargetAudience(props.editElement.targetAudience);
@@ -167,6 +169,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       category,
       description,
       year,
+      dateRecorded,
       keywords,
       language,
       origins,
@@ -279,6 +282,17 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
             value={year}
             onChange={(e) => setYear(parseInt(e.target.value))}
           />
+          {props.editElement && (
+            <TextField
+              label="Date recorded"
+              type="date"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              value={dateRecorded}
+              disabled
+            />
+          )}
           <ChippedInput
             initialArray={keywords}
             setArray={setKeywords}
@@ -305,7 +319,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
               labelId="country-label"
               id="country"
               value={origins}
-              label="country"
+              label="Origins (geographic)"
               onChange={(e) => setOrigins(e.target.value)}
             >
               {countryList.map((country) => (
