@@ -286,7 +286,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
           {props.editElement && (
             <TextField
               label="Date recorded"
-              type="date"
+              type="text"
               fullWidth
               margin="normal"
               variant="outlined"
