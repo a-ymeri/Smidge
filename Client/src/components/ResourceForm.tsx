@@ -147,19 +147,19 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     }
   }, [props.editElement]);
 
-  const testPopulate = () => {
-    const rand_int = Math.floor(Math.random() * 1000);
-    setTitle("Title " + rand_int);
-    setCategory("Religious");
-    setDescription("Description " + rand_int);
-    setYear(2020);
-    setLanguage("Language " + rand_int);
-    setOrigins("Origins " + rand_int);
-    setTargetAudience("Target Audience " + rand_int);
-    setLink("Link " + rand_int);
-    setKeywords(["Keyword " + rand_int]);
-    setSocialMedia("YouTube");
-  };
+  // const testPopulate = () => {
+  //   const rand_int = Math.floor(Math.random() * 1000);
+  //   setTitle("Title " + rand_int);
+  //   setCategory("Religious");
+  //   setDescription("Description " + rand_int);
+  //   setYear(2020);
+  //   setLanguage("Language " + rand_int);
+  //   setOrigins("Origins " + rand_int);
+  //   setTargetAudience("Target Audience " + rand_int);
+  //   setLink("Link " + rand_int);
+  //   setKeywords(["Keyword " + rand_int]);
+  //   setSocialMedia("YouTube");
+  // };
 
   const handleSubmitCallback = () => {
     // Here, you can send the data to your backend or perform any necessary actions
