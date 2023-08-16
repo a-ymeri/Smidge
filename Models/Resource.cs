@@ -19,6 +19,7 @@ namespace Smidge.Models
         public string TargetAudience { get; set; }
         public int Year { get; set; }
         public string SocialMedia { get; set; }
+        public DateTime DateRecorded { get; set; }
 
 
         public Resource()
@@ -33,6 +34,7 @@ namespace Smidge.Models
             Year = 0;
             SocialMedia = string.Empty;
             ResourceKeywords = new List<ResourceKeyword>();
+            DateRecorded = DateTime.Now.ToUniversalTime();
         }
 
         public Resource(string title, string description, string category, string language, string origins, string link, string targetAudience, int year, string socialMedia) {
@@ -46,11 +48,13 @@ namespace Smidge.Models
             Year = year;
             ResourceKeywords = new List<ResourceKeyword>();
             SocialMedia = socialMedia;
+            DateRecorded = DateTime.Now.ToUniversalTime();
+
         }
 
         public override string ToString()
         {
-            return $"Title: {Title}, Description: {Description}, Category: {Category}, Language: {Language}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year}";
+            return $"Title: {Title}, Description: {Description}, Category: {Category}, Language: {Language}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year} SocialMedia: {SocialMedia}, DateRecorded: {DateRecorded}";
         }
 
     }

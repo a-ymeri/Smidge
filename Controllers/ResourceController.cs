@@ -310,7 +310,8 @@ namespace Smidge.Controller
                 category: resource.Category,
                 //categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
                 keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList(),
-                socialMedia: resource.SocialMedia
+                socialMedia: resource.SocialMedia,
+                dateRecorded: resource.DateRecorded
                 );
         }
 

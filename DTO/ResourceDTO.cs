@@ -1,4 +1,6 @@
-﻿namespace Smidge.DTO
+﻿using Smidge.Models;
+
+namespace Smidge.DTO
 {
     public class RequestResourceDTO
     {
@@ -49,10 +51,11 @@
         public string TargetAudience { get; set; } = string.Empty;
         public int Year { get; set; } = 0;
         public string SocialMedia { get; set; } = string.Empty;
+        public DateTime DateRecorded { get; set; }
 
 
 
-        public ResponseResourceDTO(int id, string title, string description, string category, string language, ICollection<string> keywords, string origins, string link, string targetAudience, int year, string socialMedia)
+        public ResponseResourceDTO(int id, string title, string description, string category, string language, ICollection<string> keywords, string origins, string link, string targetAudience, int year, string socialMedia, DateTime dateRecorded)
         {
             Id = id;
             Title = title;
@@ -65,6 +68,24 @@
             TargetAudience = targetAudience;
             Year = year;
             SocialMedia = socialMedia;
+            DateRecorded = dateRecorded;
+
+        }
+
+        public ResponseResourceDTO(Resource resource)
+        {
+            Id = resource.Id;
+            Title = resource.Title;
+            Description = resource.Description;
+            Category = resource.Category;
+            Language = resource.Language;
+            Keywords = resource.ResourceKeywords.Select(k => k.Keyword).ToList().Select(k => k.Name).ToList();
+            Origins = resource.Origins;
+            Link = resource.Link;
+            TargetAudience = resource.TargetAudience;
+            Year = resource.Year;
+            SocialMedia = resource.SocialMedia;
+            DateRecorded = resource.DateRecorded;
         }
     }
 }

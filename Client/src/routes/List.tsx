@@ -130,8 +130,14 @@ export default function List({ columns }: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get<Resource[]>("/api/resource");
-      setResources(result.data);
+      const result = (await axios.get<Resource[]>("/api/resource")).data;
+      const convertedDatesList: any = result.map((resource) => {
+        return {
+          ...resource,
+          dateRecorded: resource.dateRecorded.split("T")[0],
+        };
+      });
+      setResources(convertedDatesList);
     };
     fetchData();
   }, []);
