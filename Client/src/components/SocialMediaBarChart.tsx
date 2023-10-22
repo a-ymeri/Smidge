@@ -34,7 +34,7 @@ const SocialMediaBarChart = () => {
     const getData = async () => {
       let breakdown = (await axios.get("/api/resource/socialmedia")).data;
 
-=      breakdown = breakdown.map((el: SocialMedia) => {
+      breakdown = breakdown.map((el: SocialMedia) => {
         return { ...el, count: el.count };
       });
 
