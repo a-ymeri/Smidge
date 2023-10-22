@@ -96,9 +96,10 @@ interface Props {
 }
 
 export default function List({ columns }: Props) {
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:5173"
-    : "https://smidge.ardity.dev/list";
+  const redirectUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5173"
+      : "https://smidge.ardity.dev/list";
   const [resources, setResources] = useState<Resource[]>([]);
 
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
@@ -387,7 +388,7 @@ export default function List({ columns }: Props) {
             <MicrosoftLogin
               clientId={"ea90c1ea-9587-4373-b1ba-cc7b1987e6c2"}
               authCallback={handleMicrosoftLogin}
-              redirectUri="http://localhost:5173/"
+              redirectUri={redirectUrl}
               children={undefined}
               buttonTheme="light_short"
             />
