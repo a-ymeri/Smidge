@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import { GoogleLogin } from "@react-oauth/google";
+import MicrosoftLogin from "react-microsoft-login";
 import jwtDecode from "jwt-decode";
 
 import {
@@ -165,6 +166,27 @@ export default function List({ columns }: Props) {
         alert("You are not authorized to access this page");
         // navigate("/");
         // window.location.reload();
+      });
+  };
+
+  const handleMicrosoftLogin = (err: any, resp: any) => {
+    const credential = resp.idToken;
+    // send token to backend in Authorization header
+    axios
+      .get("/api/auth/login", {
+        headers: { Authorization: `Bearer ${credential}` },
+      })
+      .then((resp) => {
+        // store in cookies that the user is logged in
+        const token = resp.data;
+        const decoded: any = jwtDecode(token);
+        document.cookie = `token=${token}; expires=${new Date(
+          decoded.exp * 1000
+        ).toUTCString()} path=/`;
+        window.location.reload();
+      })
+      .catch(() => {
+        alert("You are not authorized to access this page");
       });
   };
 
@@ -348,7 +370,24 @@ export default function List({ columns }: Props) {
         />
       </div>
       {!showAdmin && filteredColumns.length > 5 && (
-        <div style={{ width: "120px", marginTop: "15px" }}>
+        <div
+          style={{
+            width: "120px",
+            marginTop: "15px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ paddingBottom: "10px" }}>
+            <MicrosoftLogin
+              clientId={"ea90c1ea-9587-4373-b1ba-cc7b1987e6c2"}
+              authCallback={handleMicrosoftLogin}
+              redirectUri="http://localhost:5173/"
+              children={undefined}
+              buttonTheme="light_short"
+            />
+          </div>
           <GoogleLogin
             onSuccess={handleGoogleLogin}
             onError={() => {

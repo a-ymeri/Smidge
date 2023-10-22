@@ -87,5 +87,10 @@ namespace Smidge.DTO
             SocialMedia = resource.SocialMedia;
             DateRecorded = resource.DateRecorded;
         }
+
+        public ResponseResourceDTO()
+        {
+
+        }
     }
 }
