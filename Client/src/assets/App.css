@@ -138,6 +138,10 @@ html {
   min-height: 10vh;
 }
 
+[data-field="link"] > a {
+  word-break: break-all;
+}
+
 .footer-left {
   display: flex;
   justify-content: space-between;

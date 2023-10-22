@@ -96,6 +96,9 @@ interface Props {
 }
 
 export default function List({ columns }: Props) {
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5173"
+    : "https://smidge.ardity.dev/list";
   const [resources, setResources] = useState<Resource[]>([]);
 
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
