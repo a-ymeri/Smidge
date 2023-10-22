@@ -34,9 +34,8 @@ const SocialMediaBarChart = () => {
     const getData = async () => {
       let breakdown = (await axios.get("/api/resource/socialmedia")).data;
 
-      //Todo: remove the following:
-      breakdown = breakdown.map((el: SocialMedia) => {
-        return { ...el, count: el.count + 5 };
+=      breakdown = breakdown.map((el: SocialMedia) => {
+        return { ...el, count: el.count };
       });
 
       setSocialMediaBreakdown(breakdown);

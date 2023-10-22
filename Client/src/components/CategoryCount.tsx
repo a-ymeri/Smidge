@@ -26,12 +26,6 @@ const CategoryCount: React.FC = () => {
         religious: breakdown["Religious"] || 0,
       };
 
-      //TODO: REMOvE, added for testing only
-      data.farRight += 10;
-      data.antivax += 10;
-      data.conspiracy += 10;
-      data.religious += 10;
-
       setCategoryBreakdown(data);
     };
     getData();
