@@ -170,6 +170,7 @@ export default function List({ columns }: Props) {
   };
 
   const handleMicrosoftLogin = (err: any, resp: any) => {
+    if (err) console.log(err);
     const credential = resp.idToken;
     // send token to backend in Authorization header
     axios
