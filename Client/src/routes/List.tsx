@@ -99,7 +99,7 @@ export default function List({ columns }: Props) {
   const redirectUrl =
     process.env.NODE_ENV === "development"
       ? "http://localhost:5173"
-      : "https://smidge.ardity.dev/list";
+      : "https://smidge.ardity.dev";
   const [resources, setResources] = useState<Resource[]>([]);
 
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
