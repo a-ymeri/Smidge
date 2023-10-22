@@ -6,6 +6,8 @@ using Smidge.Data;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Smidge
 {
@@ -18,60 +20,113 @@ namespace Smidge
 
             //allow all origins
             var allowedOrigins = new string[] { "*" };
-            String[] urls = {"https://0.0.0.0:7000"};
+            String[] urls = { "https://0.0.0.0:7000" };
+
             builder.WebHost.UseUrls(urls);
 
-
-
-
-                // Add services to the container.
-                builder.Services.AddAuthentication(x =>
+            // Add services to the container.
+            builder.Services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(options =>
+            })
+                .AddJwtBearer("Google",options =>
+            {
+                options.Authority = "https://accounts.google.com";
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.Authority = "https://accounts.google.com";
-                    options.TokenValidationParameters = new TokenValidationParameters
+                    ValidateIssuer = true,
+                    ValidIssuer = "https://accounts.google.com",
+                    ValidateAudience = true,
+                    ValidAudience = "361463634645-k1brd3lmdc06n66761o6hmi903onipaj.apps.googleusercontent.com",
+                    ValidateLifetime = true,
+                    IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
                     {
-                        ValidateIssuer = true,
-                        ValidIssuer = "https://accounts.google.com",
-                        ValidateAudience = true,
-                        ValidAudience = "361463634645-k1brd3lmdc06n66761o6hmi903onipaj.apps.googleusercontent.com",
-                        ValidateLifetime = true,
-                        IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
-                        {
-                            var httpClient = new HttpClient();
-                            var keysJson = httpClient.GetStringAsync("https://www.googleapis.com/oauth2/v3/certs").Result;
-                            var keys = JsonConvert.DeserializeObject<JsonWebKeySet>(keysJson).Keys;
-                            return keys;
-                        },
-                        // Only allow admin@gmail.com as email
+                        var httpClient = new HttpClient();
+                        var keysJson = httpClient.GetStringAsync("https://www.googleapis.com/oauth2/v3/certs").Result;
+                        var keys = JsonConvert.DeserializeObject<JsonWebKeySet>(keysJson).Keys;
+                        return keys;
+                    },
+                    // Only allow admin@gmail.com as email
 
-                    };
+                };
 
-                    options.Events = new JwtBearerEvents
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
                     {
-                        OnTokenValidated = async context =>
-                        {
 
-                            var email = context.Principal.FindFirstValue(ClaimTypes.Email);
-                            var allowedEmails = new string[]
-                            {
+                        var email = context.Principal.FindFirstValue(ClaimTypes.Email);
+                        var allowedEmails = new string[]
+                        {
                                 "arditymeri7@gmail.com",
                                 "vijon.b@gmail.com",
-                                "wbsbkcss@gmail.com"
+                                "wbsbkcss@gmail.com",
+                                "ardit.ymeri@hotmail.com",
+                                "gramossejdiu7@gmail.com"
 
-                            };
-                            if (!allowedEmails.Contains(email))
-                            {
-                                context.Fail("Unauthorized");
-                            }
+                        };
+                        if (!allowedEmails.Contains(email))
+                        {
+                            context.Fail("Unauthorized");
                         }
-                    };
+                    }
+                };
 
-                });
+            })
+        .AddJwtBearer("Azure", options =>
+            {
+                options.Authority = "https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0";
+                // Outlook-specific configuration
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    //ValidIssuer = "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
+                    ValidateAudience = false,
+                    ValidAudience = "ea90c1ea-9587-4373-b1ba-cc7b1987e6c2",
+                    ValidateLifetime = true,
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
+                    {
 
+                        var email = context.Principal.FindFirstValue("preferred_username");
+                        var allowedEmails = new string[]
+                        {
+                                "ardit.ymeri@hotmail.com",
+                                "gramos.sejdiu@qkss.org",
+                                "info@qkss.org"
+
+                        };
+                        if (!allowedEmails.Contains(email))
+                        {
+                            context.Fail("Unauthorized");
+                        }
+                        else
+                        {
+                            context.Success();
+                        }
+                    },
+                    OnForbidden = async context =>
+                    {
+                        Console.WriteLine(context);
+                    },
+                    OnAuthenticationFailed = async context =>
+                    {
+                        Console.WriteLine(context.Principal);
+                    }
+                };
+            });
+
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .AddAuthenticationSchemes("Google", "Azure")
+                    .Build();
+            });
 
             builder.Services.AddControllers();
 
@@ -112,5 +167,6 @@ namespace Smidge
 
             app.Run();
         }
+
     }
 }
