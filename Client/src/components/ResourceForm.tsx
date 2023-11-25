@@ -191,7 +191,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     const data_object: Resource = {
       id: 0,
       title,
-      categories,
+      categories: selectedCategories,
       description,
       year,
       dateRecorded,
