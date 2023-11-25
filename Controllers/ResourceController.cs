@@ -83,6 +83,9 @@ namespace Smidge.Controller
 
             var resource = await dataContext.Resources
                      .Include(r => r.ResourceKeywords)
+                        .ThenInclude(rk => rk.Keyword)
+                        .Include(r => r.ResourceCategories)
+                        .ThenInclude(rc => rc.Category)
                      .FirstOrDefaultAsync(r => r.Id == id);
 
             if (resource == null)
