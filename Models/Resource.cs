@@ -10,7 +10,7 @@ namespace Smidge.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        //public ICollection<ResourceCategory> ResourceCategories { get; set; }
+        public ICollection<ResourceCategory> ResourceCategories { get; set; }
         public string Category { get; set; }
         public ICollection<ResourceKeyword> ResourceKeywords { get; set; }
         public string Language { get; set; }
@@ -34,11 +34,11 @@ namespace Smidge.Models
             Year = 0;
             SocialMedia = string.Empty;
             ResourceKeywords = new List<ResourceKeyword>();
+            ResourceCategories = new List<ResourceCategory>();
             DateRecorded = DateTime.Now.ToUniversalTime();
         }
 
-        public Resource(string title, string description, string category, string language, string origins, string link, string targetAudience, int year, string socialMedia) {
-            Category = category;
+        public Resource(string title, string description, string language, string origins, string link, string targetAudience, int year, string socialMedia) {
             Title = title;
             Description = description;
             Language = language;
@@ -47,6 +47,7 @@ namespace Smidge.Models
             TargetAudience = targetAudience;
             Year = year;
             ResourceKeywords = new List<ResourceKeyword>();
+            ResourceCategories = new List<ResourceCategory>();
             SocialMedia = socialMedia;
             DateRecorded = DateTime.Now.ToUniversalTime();
 

@@ -37,8 +37,12 @@ namespace Smidge.Controller
             }
 
             //query resources, include keywords
-            var resources = await dataContext.Resources.Include(r => r.ResourceKeywords)
-                .ThenInclude(rk => rk.Keyword).ToListAsync();
+            var resources = await dataContext.Resources.
+                Include(r => r.ResourceKeywords)
+                .ThenInclude(rk => rk.Keyword)
+                .Include(r => r.ResourceCategories)
+                .ThenInclude(rc => rc.Category)
+                .ToListAsync();
             var responseResourceDTOs = new List<ResponseResourceDTO>();
             foreach (var resource in resources)
             {
@@ -95,7 +99,6 @@ namespace Smidge.Controller
             resource.Origins = requestResourceDTO.Origins;
             resource.TargetAudience = requestResourceDTO.TargetAudience;
             resource.Year = requestResourceDTO.Year;
-            resource.Category = requestResourceDTO.Category;
 
             //get keywords from db
             var keywords = dataContext.Keywords.Where(k => requestResourceDTO.Keywords.Contains(k.Name)).ToList();
@@ -109,7 +112,6 @@ namespace Smidge.Controller
                 keywords.Add(newKeyword);
             }
 
-
             var resourceKeywords = keywords.Select(k => new ResourceKeyword
             {
                 Keyword = k,
@@ -118,10 +120,29 @@ namespace Smidge.Controller
             }).ToList();
 
             resource.ResourceKeywords.Clear();
-            //resource.ResourceCategories.Clear();
-
-            //resource.ResourceCategories = resourceCategories;
             resource.ResourceKeywords = resourceKeywords;
+
+            //get categories from db
+            var categories = dataContext.Categories.Where(c => requestResourceDTO.Categories.Contains(c.Name)).ToList();
+            //get categories to be added
+            var categoriesToBeAdded = requestResourceDTO.Categories.Where(c => !categories.Select(c => c.Name).Contains(c)).ToList();
+            //add categories to db
+            foreach (var category in categoriesToBeAdded)
+            {
+                var newCategory = new Category(name: category);
+                dataContext.Categories.Add(newCategory);
+                categories.Add(newCategory);
+            }
+
+            var resourceCategories = categories.Select(c => new ResourceCategory
+            {
+                Category = c,
+                Resource = resource,
+                CategoryId = c.Id
+            }).ToList();
+
+            resource.ResourceCategories.Clear();
+            resource.ResourceCategories = resourceCategories;
 
 
             //push to db
@@ -138,8 +159,8 @@ namespace Smidge.Controller
 
         public async Task<ActionResult<ResponseResourceDTO>> PostResource(RequestResourceDTO body)
         {
+
             var resource = new Resource(title: body.Title,
-                category: body.Category,
                 description: body.Description,
                 language: body.Language,
                 link: body.Link,
@@ -165,7 +186,7 @@ namespace Smidge.Controller
             }
 
 
-            var resourceKeywords = keywords.Select(k => new ResourceKeyword
+            resource.ResourceKeywords = keywords.Select(k => new ResourceKeyword
             {
                 Keyword = k,
                 Resource = resource,
@@ -173,7 +194,23 @@ namespace Smidge.Controller
             }).ToList();
 
             //resource.ResourceCategories = resourceCategories;
-            resource.ResourceKeywords = resourceKeywords;
+
+            var categories = dataContext.Categories.Where(c => body.Categories.Contains(c.Name)).ToList();
+            var categoriesToBeAdded = body.Categories.Where(c => !categories.Select(c => c.Name).Contains(c)).ToList();
+            foreach (var category in categoriesToBeAdded)
+            {
+                var newCategory = new Category(name: category);
+                dataContext.Categories.Add(newCategory);
+                categories.Add(newCategory);
+            }
+
+            resource.ResourceCategories = categories.Select(c => new ResourceCategory
+            {
+                Category = c,
+                Resource = resource,
+                CategoryId = c.Id
+            }).ToList();
+
 
             dataContext.Resources.Add(resource);
             await dataContext.SaveChangesAsync();
@@ -239,14 +276,15 @@ namespace Smidge.Controller
         [HttpGet("categories")]
         public async Task<IActionResult> GetCategories()
         {
-            var resources = await dataContext.Resources
+            var resources = await dataContext.ResourceCategories
+                .Include(rc => rc.Category)
                 .ToListAsync();
             var categories = resources.GroupBy(r => r.Category).ToList();
             //map
             Dictionary<string, int> categoryBreakdown = new Dictionary<string, int>();
             foreach (var category in categories)
             {
-                categoryBreakdown[category.Key] = category.Count();
+                categoryBreakdown[category.Key.Name] = category.Count();
             }
 
             return Ok(categoryBreakdown);
@@ -307,7 +345,7 @@ namespace Smidge.Controller
                 targetAudience: resource.TargetAudience,
                 year: resource.Year,
                 link: resource.Link,
-                category: resource.Category,
+                categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
                 //categories: resource.ResourceCategories.Select(rc => rc.Category.Name).ToList(),
                 keywords: resource.ResourceKeywords.Select(k => k.Keyword.Name).ToList(),
                 socialMedia: resource.SocialMedia,

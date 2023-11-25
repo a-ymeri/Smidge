@@ -10,6 +10,9 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  OutlinedInput,
+  Checkbox,
+  ListItemText,
 } from "@mui/material";
 import ChippedInput from "./ChippedInput";
 import { Resource } from "../routes/List";
@@ -31,6 +34,7 @@ const categories = [
 ];
 const languages = [
   "Albanian",
+  "Arabic",
   "Bulgarian",
   "Croatian",
   "Czech",
@@ -51,10 +55,12 @@ const languages = [
   "Polish",
   "Portuguese",
   "Romanian",
+  "Serbian",
   "Slovak",
   "Slovenian",
   "Spanish",
   "Swedish",
+  "Turkish",
 ];
 
 type Props = {
@@ -119,7 +125,6 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   ];
 
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [otherCategory, setOtherCategory] = useState(""); //only used if category is "Other"
   const [description, setDescription] = useState("");
   const [year, setYear] = useState(2023);
@@ -134,7 +139,6 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
   useEffect(() => {
     if (props.editElement) {
       setTitle(props.editElement.title);
-      setCategory(props.editElement.category);
       setDescription(props.editElement.description);
       setYear(props.editElement.year);
       setDateRecorded(props.editElement.dateRecorded);
@@ -144,6 +148,27 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       setLink(props.editElement.link);
       setKeywords(props.editElement.keywords);
       setSocialMedia(props.editElement.socialMedia);
+
+      let containsOther = false;
+      props.editElement.categories.forEach((category) => {
+        if (!categories.includes(category)) {
+          containsOther = true;
+        }
+      });
+
+      if (containsOther || props.editElement.categories.includes("Other")) {
+        const newCategories = props.editElement.categories.filter(
+          (el) => categories.includes(el) // Only keep the categories that are in the categories array
+        );
+        const otherCategory = props.editElement.categories.filter(
+          (el) => !categories.includes(el) // Only keep the categories that are not in the categories array
+        )[0];
+        newCategories.push("Other");
+        setSelectedCategories(newCategories);
+        setOtherCategory(otherCategory);
+      } else {
+        setSelectedCategories(props.editElement.categories);
+      }
     }
   }, [props.editElement]);
 
@@ -166,7 +191,7 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     const data_object: Resource = {
       id: 0,
       title,
-      category,
+      categories,
       description,
       year,
       dateRecorded,
@@ -178,14 +203,15 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
       socialMedia,
     };
 
-    if (otherCategory !== "") {
-      data_object.category = otherCategory;
+    if (selectedCategories.includes("Other")) {
+      const newCategories = selectedCategories.filter((el) => el !== "Other");
+      newCategories.push(otherCategory);
     }
 
     handleSubmit(data_object);
 
     setTitle("");
-    setCategory("");
+    setSelectedCategories([]);
     setDescription("");
     setYear(2023);
     setLanguage("");
@@ -197,14 +223,25 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
     handleClose();
   };
 
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    const selectedCategory = event.target.value as string;
-    if (selectedCategory === "Other") {
-      setCategory(selectedCategory);
-    } else {
-      setCategory(selectedCategory);
-      setOtherCategory(""); // Clear the otherCategory value if it was previously set
-    }
+  // const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+  //   const selectedCategory = event.target.value as string;
+  //   if (selectedCategory === "Other") {
+  //     setCategory(selectedCategory);
+  //   } else {
+  //     setCategory(selectedCategory);
+  //     setOtherCategory(""); // Clear the otherCategory value if it was previously set
+  //   }
+  // };
+
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const handleCategoryChange2 = (
+    event: SelectChangeEvent<typeof selectedCategories>
+  ) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedCategories(value as string[]);
   };
 
   const handleOtherCategoryChange = (
@@ -242,19 +279,26 @@ function ResourceForm({ open, handleClose, handleSubmit, ...props }: Props) {
             <Select
               labelId="category-label"
               id="category"
-              value={category}
-              label="Category"
-              onChange={handleCategoryChange}
+              multiple
+              value={selectedCategories}
               style={{
-                width: category === "Other" ? "50%" : "100%",
+                width: selectedCategories.includes("Other") ? "50%" : "100%",
               }}
+              onChange={handleCategoryChange2}
+              input={<OutlinedInput label="Categories" />}
+              renderValue={(selected) => (selected as string[]).join(", ")} // explicitly cast to string[]
             >
               {categories.map((category) => (
-                <MenuItem value={category}>{category}</MenuItem>
+                <MenuItem key={category} value={category}>
+                  <Checkbox
+                    checked={selectedCategories.indexOf(category) > -1}
+                  />
+                  <ListItemText primary={category} />
+                </MenuItem>
               ))}
             </Select>
 
-            {category === "Other" && (
+            {selectedCategories.includes("Other") && (
               <TextField
                 style={{ width: "45%", marginLeft: "5%" }}
                 label="Please specify category"

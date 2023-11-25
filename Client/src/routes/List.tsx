@@ -35,7 +35,7 @@ export interface Resource {
   origins: string;
   targetAudience: string;
   keywords: string[];
-  category: string;
+  categories: string[];
   link: string;
   socialMedia: string;
 }
@@ -69,8 +69,8 @@ const tableColumns: GridColDef[] = [
       params.row.keywords.join(", "),
   },
   {
-    field: "category",
-    headerName: "Category",
+    field: "categories",
+    headerName: "Categories",
     width: 250,
   },
   {

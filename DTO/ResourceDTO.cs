@@ -6,7 +6,7 @@ namespace Smidge.DTO
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Category { get; set; }
+        public string[] Categories { get; set; }
         public string Language { get; set; } = string.Empty;
         public string[] Keywords { get; set; }
         public string Origins { get; set; } = string.Empty;
@@ -16,11 +16,11 @@ namespace Smidge.DTO
         public string SocialMedia { get; set; } = string.Empty;
 
 
-        public RequestResourceDTO(string title, string description, string category, string language, string[] keywords, string origins, string link, string targetAudience, int year, string socialMedia)
+        public RequestResourceDTO(string title, string description, string[] categories, string language, string[] keywords, string origins, string link, string targetAudience, int year, string socialMedia)
         {
             Title = title;
             Description = description;
-            Category = category;
+            Categories = categories;
             Language = language;
             Keywords = keywords;
             Origins = origins;
@@ -32,7 +32,7 @@ namespace Smidge.DTO
 
         public override string ToString()
         {
-            return $"Name: {Title}, Description: {Description}, Categories: {Category}, Language: {Language}, Keywords: {Keywords}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year}";
+            return $"Name: {Title}, Description: {Description}, Categories: {Categories}, Language: {Language}, Keywords: {Keywords}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year}";
         }
 
 
@@ -43,7 +43,7 @@ namespace Smidge.DTO
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Category { get; set; }
+        public ICollection<string> Categories { get; set; }
         public string Language { get; set; } = string.Empty;
         public ICollection<string> Keywords { get; set; }
         public string Origins { get; set; } = string.Empty;
@@ -55,12 +55,12 @@ namespace Smidge.DTO
 
 
 
-        public ResponseResourceDTO(int id, string title, string description, string category, string language, ICollection<string> keywords, string origins, string link, string targetAudience, int year, string socialMedia, DateTime dateRecorded)
+        public ResponseResourceDTO(int id, string title, string description, ICollection<string> categories, string language, ICollection<string> keywords, string origins, string link, string targetAudience, int year, string socialMedia, DateTime dateRecorded)
         {
             Id = id;
             Title = title;
             Description = description;
-            Category = category;
+            Categories = categories;
             Language = language;
             Keywords = keywords;
             Origins = origins;
@@ -77,7 +77,7 @@ namespace Smidge.DTO
             Id = resource.Id;
             Title = resource.Title;
             Description = resource.Description;
-            Category = resource.Category;
+            Categories = resource.ResourceCategories.Select(el => el.Category).ToList().Select(el => el.Name).ToList();
             Language = resource.Language;
             Keywords = resource.ResourceKeywords.Select(k => k.Keyword).ToList().Select(k => k.Name).ToList();
             Origins = resource.Origins;

@@ -20,7 +20,7 @@ const CategoryCount: React.FC = () => {
     const getData = async () => {
       const breakdown = (await axios.get("/api/resource/categories")).data;
       const data = {
-        farRight: breakdown["Far-right"] || 0,
+        farRight: breakdown["Far-Right"] || 0,
         antivax: breakdown["Anti-Vax"] || 0,
         conspiracy: breakdown["Conspiracy"] || 0,
         religious: breakdown["Religious"] || 0,
