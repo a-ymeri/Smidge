@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using System.Configuration;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Smidge
@@ -95,11 +96,12 @@ namespace Smidge
                         var allowedEmails = new string[]
                         {
                                 "ardit.ymeri@hotmail.com",
-                                "gramos.sejdiu@qkss.org",
-                                "info@qkss.org"
-
                         };
-                        if (!allowedEmails.Contains(email))
+                        // var regexMatch = new Regex(@"^[A-Za-z0-9._%+-]+@qkss\.org$");
+                        var regexMatch = new Regex(@"^[A-Za-z0-9._%+-]+@qkss\.org$");
+                        var validUser = email != null && (regexMatch.IsMatch(email) || allowedEmails.Contains(email));
+
+                        if (!validUser)
                         {
                             context.Fail("Unauthorized");
                         }
