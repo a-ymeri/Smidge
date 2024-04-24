@@ -11,7 +11,6 @@ namespace Smidge.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public ICollection<ResourceCategory> ResourceCategories { get; set; }
-        public string Category { get; set; }
         public ICollection<ResourceKeyword> ResourceKeywords { get; set; }
         public string Language { get; set; }
         public string Origins { get; set; }
@@ -24,7 +23,6 @@ namespace Smidge.Models
 
         public Resource()
         {
-            Category = string.Empty;
             Title = string.Empty;
             Description = string.Empty;
             Language = string.Empty;
@@ -55,7 +53,7 @@ namespace Smidge.Models
 
         public override string ToString()
         {
-            return $"Title: {Title}, Description: {Description}, Category: {Category}, Language: {Language}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year} SocialMedia: {SocialMedia}, DateRecorded: {DateRecorded}";
+            return $"Title: {Title}, Description: {Description}, Language: {Language}, Origins: {Origins}, Link: {Link}, TargetAudience: {TargetAudience}, Year: {Year} SocialMedia: {SocialMedia}, DateRecorded: {DateRecorded}";
         }
 
     }
