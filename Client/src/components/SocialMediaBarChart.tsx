@@ -44,7 +44,14 @@ const SocialMediaBarChart = () => {
   }, []);
 
   // const colors = ["#EEf1E6", "#799FCB", "#FEC9C9", "#F9665E", "#95B4CC"];
-  const colors = ["#ef476f", "#ffd166", "#06d6a0", "#118ab2", "#073b4c"];
+  const colors = [
+    "#ef476f",
+    "#ffd166",
+    "#06d6a0",
+    "#118ab2",
+    "#073b4c",
+    "#f3722c",
+  ];
 
   if (socialMediaBreakdown.length == 0) {
     return <></>;
