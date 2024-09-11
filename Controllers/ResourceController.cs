@@ -102,6 +102,7 @@ namespace Smidge.Controller
             resource.Origins = requestResourceDTO.Origins;
             resource.TargetAudience = requestResourceDTO.TargetAudience;
             resource.Year = requestResourceDTO.Year;
+	    resource.SocialMedia = requestResourceDTO.SocialMedia;
 
             //get keywords from db
             var keywords = dataContext.Keywords.Where(k => requestResourceDTO.Keywords.Contains(k.Name)).ToList();
