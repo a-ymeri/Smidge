@@ -64,7 +64,8 @@ namespace Smidge
                                 "vijon.b@gmail.com",
                                 "wbsbkcss@gmail.com",
                                 "ardit.ymeri@hotmail.com",
-                                "gramossejdiu7@gmail.com"
+                                "tamara.pavlovic@qkss.org",
+                                "tamara22pavlovic@gmail.com"
 
                         };
                         if (!allowedEmails.Contains(email))

@@ -30,8 +30,8 @@ namespace Smidge.Controllers
                 "vijon.b@gmail.com",
                 "wbsbkcss@gmail.com",
                 // "ardit.ymeri@hotmail.com",
-                "gramossejdiu7@gmail.com",
-                "gramos.sejdiu@qkss.org",
+                "tamara.pavlovic@qkss.org",
+                "tamara22pavlovic@gmail.com",
                 "info@qkss.org"
             };
 
