@@ -14,9 +14,8 @@ function App() {
   return (
     <>
       <Banner
-        title="SMIDGE"
-        description="Database featuring key characteristics of online videos associated with extremist narratives. 
-        Note: This database does not render a definitive qualification of these videos as extremist; rather, it identifies videos that, in
+        title="SMIDGE Database featuring key characteristics of online videos associated with extremist narratives."
+        description="Note: This database does not render a definitive qualification of these videos as extremist; rather, it identifies videos that, in
         our view, potentially contain extremist narratives."
       />
       <div
