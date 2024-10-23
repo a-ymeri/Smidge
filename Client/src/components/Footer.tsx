@@ -23,19 +23,20 @@ export default function Footer() {
             </Col>
             <Col lg={8} md={12} sm={12}>
               <p>
-                This project has received funding from the European Union’s
-                Horizon Research and Innovation Programme under grant agreement
-                No 101095290.
+                Grant Agreement Number 101095290.
+                Funded by the European Union.
               </p>
             </Col>
           </Row>
 
           <div className="footer-contents">
-            The contents of this website are the sole responsibility of the
-            authors and do not necessarily reflect the views of the European
-            Union. The European Commission and the European Research Executive
-            Agency are not responsible for any use that may be made of the
-            information this website contains.
+            Views and opinions expressed
+            are however those of the author(s) only and do not necessarily
+            reflect those of the European Union or European Research
+            Executive Agency (REA). Neither the European Union nor the
+            granting authority can be held responsible for them.
+            UK participant in Horizon Europe Project SMIDGE is supported
+            by UKRI grant numbers 10056282 (De Montfort University).
           </div>
         </Col>
         <Col lg={4} md={6} sm={12} className="footer-right">
